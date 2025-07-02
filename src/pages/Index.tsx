@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { WelcomeScreen } from '@/components/WelcomeScreen';
+import { LanguageSwitcher } from '@/components/ui/language-switcher';
 import { ImageSetupScreen } from '@/components/ImageSetupScreen';
 import { PersonalInfoScreen } from '@/components/PersonalInfoScreen';
 import { OutfitGenerationScreen } from '@/components/OutfitGenerationScreen';
@@ -28,6 +30,7 @@ interface PersonalInfo {
 }
 
 const Index = () => {
+  const { t } = useTranslation();
   const { isAuthenticated, loading: authLoading } = useAuth();
   const { trackEvent } = useAnalytics();
   const [currentStage, setCurrentStage] = useState<AppStage>('welcome');
@@ -139,23 +142,28 @@ const Index = () => {
   if (isAuthenticated && currentStage === 'welcome') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-background/95">
+        {/* Language Switcher */}
+        <div className="absolute top-4 right-4">
+          <LanguageSwitcher />
+        </div>
+        
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-healing-purple to-healing-blue bg-clip-text text-transparent mb-4">
-                Welcome Back to StyleAI
+                {t('welcome.title')}
               </h1>
               <p className="text-muted-foreground text-lg">
-                Your personalized styling journey continues
+                {t('welcome.subtitle')}
               </p>
             </div>
 
             <Tabs defaultValue="dashboard" className="space-y-6">
               <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-                <TabsTrigger value="profile">Profile</TabsTrigger>
-                <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                <TabsTrigger value="accessibility">Accessibility</TabsTrigger>
+                <TabsTrigger value="dashboard">{t('navigation.home')}</TabsTrigger>
+                <TabsTrigger value="profile">{t('navigation.profile')}</TabsTrigger>
+                <TabsTrigger value="analytics">{t('navigation.analytics')}</TabsTrigger>
+                <TabsTrigger value="accessibility">{t('navigation.accessibility')}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="dashboard" className="space-y-6">
@@ -165,15 +173,15 @@ const Index = () => {
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         <User className="w-5 h-5 mr-2 text-healing-purple" />
-                        Generate New Outfit
+                        {t('results.title')}
                       </CardTitle>
                       <CardDescription>
-                        Create a new personalized outfit recommendation
+                        {t('results.subtitle')}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <Button className="w-full bg-healing-purple hover:bg-healing-purple/90">
-                        Start New Session
+                        {t('welcome.getStarted')}
                       </Button>
                     </CardContent>
                   </Card>
@@ -183,10 +191,10 @@ const Index = () => {
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         <Shirt className="w-5 h-5 mr-2 text-healing-green" />
-                        Virtual Wardrobe
+                        {t('navigation.wardrobe')}
                       </CardTitle>
                       <CardDescription>
-                        Organize your clothes and plan outfits
+                        {t('wardrobe.description', 'Organize your clothes and plan outfits')}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -201,10 +209,10 @@ const Index = () => {
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         <Users className="w-5 h-5 mr-2 text-healing-blue" />
-                        Community Hub
+                        {t('navigation.community')}
                       </CardTitle>
                       <CardDescription>
-                        Connect and share with others
+                        {t('community.subtitle')}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -219,10 +227,10 @@ const Index = () => {
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         <ShoppingCart className="w-5 h-5 mr-2 text-warm-orange" />
-                        Shopping & Wishlist
+                        {t('navigation.shopping')}
                       </CardTitle>
                       <CardDescription>
-                        Discover adaptive fashion items
+                        {t('shopping.subtitle')}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>

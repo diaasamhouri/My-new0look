@@ -1,0 +1,91 @@
+{
+  "welcome": {
+    "title": "Welcome to StyleAI",
+    "subtitle": "Your AI-Powered Accessible Style Assistant",
+    "description": "Discover outfits that celebrate your unique style and accessibility needs. Upload your photo or describe your preferences to get personalized outfit recommendations.",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "navigation": {
+    "home": "Home",
+    "wardrobe": "Virtual Wardrobe",
+    "community": "Community",
+    "shopping": "Shopping",
+    "profile": "Profile",
+    "accessibility": "Accessibility",
+    "analytics": "Style Insights"
+  },
+  "personalInfo": {
+    "title": "Personal Information",
+    "subtitle": "Tell us about yourself to get personalized recommendations",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "age": "Age",
+    "bodyType": "Body Type",
+    "selectBodyType": "Select your body type",
+    "skinTone": "Skin Tone",
+    "selectSkinTone": "Select your skin tone",
+    "stylePreferences": "Style Preferences",
+    "selectStyles": "Select your preferred styles",
+    "accessibilityNeeds": "Accessibility Needs",
+    "selectNeeds": "Select any that apply",
+    "next": "Next",
+    "skip": "Skip"
+  },
+  "imageSetup": {
+    "title": "Upload Your Photo",
+    "subtitle": "Upload a photo to get AI-powered outfit recommendations",
+    "uploadPhoto": "Upload Photo",
+    "takePhoto": "Take Photo",
+    "continueWithoutPhoto": "Continue Without Photo",
+    "next": "Next"
+  },
+  "outfitGeneration": {
+    "title": "Generating Your Perfect Outfit",
+    "subtitle": "Our AI is analyzing your preferences and creating personalized recommendations",
+    "analyzing": "Analyzing your style preferences...",
+    "generating": "Generating outfit combinations...",
+    "finalizing": "Finalizing recommendations..."
+  },
+  "results": {
+    "title": "Your Style Recommendations",
+    "subtitle": "Here are personalized outfits curated just for you",
+    "saveOutfit": "Save Outfit",
+    "shareOutfit": "Share Outfit",
+    "getMore": "Get More Recommendations",
+    "startOver": "Start Over"
+  },
+  "community": {
+    "title": "Community Hub",
+    "subtitle": "Connect, share, and inspire with the adaptive fashion community",
+    "shareStory": "Share Your Story",
+    "viewChallenges": "View Challenges",
+    "latestPosts": "Latest Posts",
+    "inspiringStories": "Inspiring Stories",
+    "styleChallenges": "Style Challenges"
+  },
+  "shopping": {
+    "title": "Shopping Integration",
+    "subtitle": "Discover adaptive fashion and build your perfect wardrobe",
+    "addToWishlist": "Add to Wishlist",
+    "viewWishlist": "View Wishlist",
+    "adaptiveFashion": "Adaptive Fashion",
+    "recommendations": "Recommendations"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Back",
+    "continue": "Continue",
+    "submit": "Submit",
+    "language": "Language",
+    "english": "English",
+    "arabic": "العربية"
+  }
+}

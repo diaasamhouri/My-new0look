@@ -1,14 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, Sparkles, Shield, Camera } from "lucide-react";
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
 
 interface WelcomeScreenProps {
   onStartExperience: () => void;
 }
 
 export const WelcomeScreen = ({ onStartExperience }: WelcomeScreenProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-gradient-healing flex items-center justify-center p-4">
+      {/* Language Switcher */}
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
       <Card className="max-w-md w-full bg-card/95 backdrop-blur-sm shadow-warm border-0 animate-fade-in">
         <div className="p-8 text-center space-y-6">
           {/* Digital Character Avatar */}
@@ -28,21 +36,19 @@ export const WelcomeScreen = ({ onStartExperience }: WelcomeScreenProps) => {
           <div className="space-y-4">
             <div className="bg-gradient-to-r from-healing-blue/10 to-healing-purple/10 rounded-xl p-4 border border-healing-blue/20">
               <h1 className="text-xl font-bold text-foreground leading-tight mb-3">
-                Welcome to My New Look!
+                {t('welcome.title')}
               </h1>
               <p className="text-foreground/90 leading-relaxed text-sm">
-                Here you can explore styles that suit you and see yourself confidently once again. 
-                <span className="block mt-2 font-medium text-healing-purple">Are you ready?</span>
+                {t('welcome.description')}
               </p>
             </div>
             
             <div className="space-y-3">
               <h2 className="text-lg font-semibold text-foreground">
-                Discover Your Unique Style
+                {t('welcome.subtitle')}
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                This personalized AI experience will help you explore outfits that celebrate your 
-                individuality and boost your confidence. Your journey to self-expression starts here.
+                {t('welcome.description')}
               </p>
             </div>
           </div>
@@ -79,7 +85,7 @@ export const WelcomeScreen = ({ onStartExperience }: WelcomeScreenProps) => {
             size="lg"
             className="w-full text-lg font-semibold py-6 mt-6"
           >
-            Start Experience
+            {t('welcome.getStarted')}
           </Button>
 
           {/* Enhanced Privacy Notice */}

@@ -1,0 +1,91 @@
+{
+  "welcome": {
+    "title": "مرحباً بك في StyleAI",
+    "subtitle": "مساعدك الذكي للأناقة المتاحة",
+    "description": "اكتشف إطلالات تحتفي بأسلوبك الفريد واحتياجاتك للإتاحة. قم برفع صورتك أو وصف تفضيلاتك للحصول على توصيات شخصية للإطلالات.",
+    "getStarted": "ابدأ الآن",
+    "learnMore": "اعرف أكثر"
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "wardrobe": "خزانة الملابس الافتراضية",
+    "community": "المجتمع",
+    "shopping": "التسوق",
+    "profile": "الملف الشخصي",
+    "accessibility": "إمكانية الوصول",
+    "analytics": "رؤى الأناقة"
+  },
+  "personalInfo": {
+    "title": "المعلومات الشخصية",
+    "subtitle": "أخبرنا عن نفسك للحصول على توصيات شخصية",
+    "name": "الاسم",
+    "namePlaceholder": "أدخل اسمك",
+    "age": "العمر",
+    "bodyType": "نوع الجسم",
+    "selectBodyType": "اختر نوع جسمك",
+    "skinTone": "لون البشرة",
+    "selectSkinTone": "اختر لون بشرتك",
+    "stylePreferences": "تفضيلات الأناقة",
+    "selectStyles": "اختر أساليبك المفضلة",
+    "accessibilityNeeds": "احتياجات إمكانية الوصول",
+    "selectNeeds": "اختر ما ينطبق عليك",
+    "next": "التالي",
+    "skip": "تخطي"
+  },
+  "imageSetup": {
+    "title": "رفع صورتك",
+    "subtitle": "قم برفع صورة للحصول على توصيات إطلالات مدعومة بالذكاء الاصطناعي",
+    "uploadPhoto": "رفع صورة",
+    "takePhoto": "التقاط صورة",
+    "continueWithoutPhoto": "المتابعة بدون صورة",
+    "next": "التالي"
+  },
+  "outfitGeneration": {
+    "title": "جاري إنشاء إطلالتك المثالية",
+    "subtitle": "ذكاؤنا الاصطناعي يحلل تفضيلاتك وينشئ توصيات شخصية",
+    "analyzing": "جاري تحليل تفضيلات أناقتك...",
+    "generating": "جاري إنشاء تركيبات الإطلالات...",
+    "finalizing": "جاري إنهاء التوصيات..."
+  },
+  "results": {
+    "title": "توصيات أناقتك",
+    "subtitle": "إليك إطلالات شخصية منتقاة خصيصاً لك",
+    "saveOutfit": "حفظ الإطلالة",
+    "shareOutfit": "مشاركة الإطلالة",
+    "getMore": "المزيد من التوصيات",
+    "startOver": "البدء من جديد"
+  },
+  "community": {
+    "title": "مركز المجتمع",
+    "subtitle": "تواصل وشارك وألهم مع مجتمع الأزياء المتاحة",
+    "shareStory": "شارك قصتك",
+    "viewChallenges": "عرض التحديات",
+    "latestPosts": "أحدث المنشورات",
+    "inspiringStories": "قصص ملهمة",
+    "styleChallenges": "تحديات الأناقة"
+  },
+  "shopping": {
+    "title": "تكامل التسوق",
+    "subtitle": "اكتشف الأزياء المتاحة وابن خزانة ملابسك المثالية",
+    "addToWishlist": "إضافة لقائمة الأمنيات",
+    "viewWishlist": "عرض قائمة الأمنيات",
+    "adaptiveFashion": "الأزياء المتاحة",
+    "recommendations": "التوصيات"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "continue": "متابعة",
+    "submit": "إرسال",
+    "language": "اللغة",
+    "english": "English",
+    "arabic": "العربية"
+  }
+}
