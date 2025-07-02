@@ -42,11 +42,22 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
     <div className="min-h-screen bg-gradient-confidence flex items-center justify-center p-4">
       <Card className="max-w-lg w-full bg-card/95 backdrop-blur-sm shadow-warm border-0 animate-fade-in">
         <div className="p-6 space-y-6">
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-3">
+            <div className="w-16 h-16 mx-auto bg-gradient-confidence rounded-full flex items-center justify-center animate-gentle-bounce">
+              <Camera className="w-8 h-8 text-primary-foreground" />
+            </div>
             <h2 className="text-2xl font-bold text-foreground">Share Your Photo</h2>
-            <p className="text-muted-foreground">
-              Choose how you'd like to provide your image for styling
+            <p className="text-muted-foreground leading-relaxed">
+              Choose how you'd like to provide your image for personalized styling. 
+              Our AI will create beautiful looks just for you.
             </p>
+            
+            {/* Enhanced privacy reminder */}
+            <div className="bg-gradient-to-r from-healing-green/10 to-healing-blue/10 rounded-lg p-3 border border-healing-green/20">
+              <p className="text-xs text-foreground/80">
+                🔒 <span className="font-medium">Privacy Protected:</span> Your image is processed temporarily and automatically deleted
+              </p>
+            </div>
           </div>
 
           {cameraMode === 'none' && (
