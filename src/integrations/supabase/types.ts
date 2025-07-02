@@ -9,7 +9,135 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      outfit_analytics: {
+        Row: {
+          color_palette: Json | null
+          confidence_score: number | null
+          id: string
+          interaction_type: string
+          outfit_data: Json
+          style_category: string | null
+          timestamp: string
+          user_id: string | null
+        }
+        Insert: {
+          color_palette?: Json | null
+          confidence_score?: number | null
+          id?: string
+          interaction_type: string
+          outfit_data: Json
+          style_category?: string | null
+          timestamp?: string
+          user_id?: string | null
+        }
+        Update: {
+          color_palette?: Json | null
+          confidence_score?: number | null
+          id?: string
+          interaction_type?: string
+          outfit_data?: Json
+          style_category?: string | null
+          timestamp?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_outfits: {
+        Row: {
+          created_at: string
+          id: string
+          is_favorite: boolean | null
+          name: string | null
+          outfit_data: Json
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_favorite?: boolean | null
+          name?: string | null
+          outfit_data: Json
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_favorite?: boolean | null
+          name?: string | null
+          outfit_data?: Json
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          accessibility_settings: Json | null
+          body_measurements: Json | null
+          created_at: string
+          id: string
+          preferred_colors: Json | null
+          preferred_styles: Json | null
+          style_personality: Json | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          accessibility_settings?: Json | null
+          body_measurements?: Json | null
+          created_at?: string
+          id?: string
+          preferred_colors?: Json | null
+          preferred_styles?: Json | null
+          style_personality?: Json | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          accessibility_settings?: Json | null
+          body_measurements?: Json | null
+          created_at?: string
+          id?: string
+          preferred_colors?: Json | null
+          preferred_styles?: Json | null
+          style_personality?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

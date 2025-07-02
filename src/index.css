@@ -122,4 +122,43 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Accessibility enhancements */
+  .high-contrast {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
+    --primary: 60 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --border: 0 0% 50%;
+  }
+
+  .reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .enhanced-focus *:focus {
+    outline: 3px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  [data-colorblind-mode="protanopia"] {
+    filter: url('#protanopia-filter');
+  }
+
+  [data-colorblind-mode="deuteranopia"] {
+    filter: url('#deuteranopia-filter');
+  }
+
+  [data-colorblind-mode="tritanopia"] {
+    filter: url('#tritanopia-filter');
+  }
+
+  /* Dynamic font sizing */
+  html {
+    font-size: var(--base-font-size, 16px);
+  }
 }
