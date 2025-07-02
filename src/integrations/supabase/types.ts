@@ -9,6 +9,150 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      challenge_participations: {
+        Row: {
+          challenge_id: string
+          description: string | null
+          id: string
+          outfit_image_url: string | null
+          submission_date: string
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          description?: string | null
+          id?: string
+          outfit_image_url?: string | null
+          submission_date?: string
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          description?: string | null
+          id?: string
+          outfit_image_url?: string | null
+          submission_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_participations_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "style_challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_comments: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_anonymous: boolean | null
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean | null
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean | null
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "community_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_likes: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_likes_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "community_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_posts: {
+        Row: {
+          comments_count: number | null
+          content: string | null
+          created_at: string
+          id: string
+          images: string[] | null
+          is_anonymous: boolean | null
+          likes_count: number | null
+          post_type: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comments_count?: number | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          images?: string[] | null
+          is_anonymous?: boolean | null
+          likes_count?: number | null
+          post_type: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comments_count?: number | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          images?: string[] | null
+          is_anonymous?: boolean | null
+          likes_count?: number | null
+          post_type?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       outfit_analytics: {
         Row: {
           color_palette: Json | null
@@ -39,6 +183,51 @@ export type Database = {
           style_category?: string | null
           timestamp?: string
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      outfit_combinations: {
+        Row: {
+          created_at: string
+          id: string
+          is_favorite: boolean | null
+          items: Json
+          last_worn_date: string | null
+          name: string
+          notes: string | null
+          occasion: string | null
+          season: string | null
+          updated_at: string
+          user_id: string
+          weather_type: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_favorite?: boolean | null
+          items: Json
+          last_worn_date?: string | null
+          name: string
+          notes?: string | null
+          occasion?: string | null
+          season?: string | null
+          updated_at?: string
+          user_id: string
+          weather_type?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_favorite?: boolean | null
+          items?: Json
+          last_worn_date?: string | null
+          name?: string
+          notes?: string | null
+          occasion?: string | null
+          season?: string | null
+          updated_at?: string
+          user_id?: string
+          weather_type?: string | null
         }
         Relationships: []
       }
@@ -102,6 +291,90 @@ export type Database = {
         }
         Relationships: []
       }
+      shopping_wishlists: {
+        Row: {
+          brand: string | null
+          category: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_adaptive_clothing: boolean | null
+          item_name: string
+          notes: string | null
+          price: number | null
+          priority: number | null
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          brand?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_adaptive_clothing?: boolean | null
+          item_name: string
+          notes?: string | null
+          price?: number | null
+          priority?: number | null
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          brand?: string | null
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_adaptive_clothing?: boolean | null
+          item_name?: string
+          notes?: string | null
+          price?: number | null
+          priority?: number | null
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      style_challenges: {
+        Row: {
+          created_at: string
+          description: string
+          end_date: string
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          participants_count: number | null
+          start_date: string
+          theme: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          end_date: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          participants_count?: number | null
+          start_date: string
+          theme: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          end_date?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          participants_count?: number | null
+          start_date?: string
+          theme?: string
+          title?: string
+        }
+        Relationships: []
+      }
       user_preferences: {
         Row: {
           accessibility_settings: Json | null
@@ -135,6 +408,63 @@ export type Database = {
           style_personality?: Json | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      wardrobe_items: {
+        Row: {
+          brand: string | null
+          care_instructions: string | null
+          category: string
+          color: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_adaptive_clothing: boolean | null
+          last_worn_date: string | null
+          name: string
+          purchase_date: string | null
+          size_info: Json | null
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+          wear_count: number | null
+        }
+        Insert: {
+          brand?: string | null
+          care_instructions?: string | null
+          category: string
+          color?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_adaptive_clothing?: boolean | null
+          last_worn_date?: string | null
+          name: string
+          purchase_date?: string | null
+          size_info?: Json | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+          wear_count?: number | null
+        }
+        Update: {
+          brand?: string | null
+          care_instructions?: string | null
+          category?: string
+          color?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_adaptive_clothing?: boolean | null
+          last_worn_date?: string | null
+          name?: string
+          purchase_date?: string | null
+          size_info?: Json | null
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
+          wear_count?: number | null
         }
         Relationships: []
       }

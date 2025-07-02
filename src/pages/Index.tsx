@@ -9,14 +9,15 @@ import { AuthScreen } from '@/components/auth/AuthScreen';
 import { UserProfile } from '@/components/profile/UserProfile';
 import { StyleInsights } from '@/components/analytics/StyleInsights';
 import { AccessibilitySettings } from '@/components/accessibility/AccessibilitySettings';
+import { VirtualWardrobeScreen } from '@/components/wardrobe/VirtualWardrobeScreen';
 import { useAuth } from '@/hooks/useAuth';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { User, BarChart3, Settings, LogOut } from 'lucide-react';
+import { User, BarChart3, Settings, LogOut, Shirt } from 'lucide-react';
 
-type AppStage = 'welcome' | 'auth' | 'profile' | 'image-setup' | 'personal-info' | 'generation' | 'results' | 'stories';
+type AppStage = 'welcome' | 'auth' | 'profile' | 'wardrobe' | 'image-setup' | 'personal-info' | 'generation' | 'results' | 'stories';
 
 interface PersonalInfo {
   gender: 'male' | 'female' | '';
@@ -103,6 +104,9 @@ const Index = () => {
       case 'profile':
         setCurrentStage('welcome');
         break;
+      case 'wardrobe':
+        setCurrentStage('welcome');
+        break;
       case 'image-setup':
         setCurrentStage('welcome');
         break;
@@ -167,19 +171,19 @@ const Index = () => {
                   </Card>
 
                   <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
-                        onClick={() => setCurrentStage('stories')}>
+                        onClick={() => setCurrentStage('wardrobe')}>
                     <CardHeader>
                       <CardTitle className="flex items-center">
-                        <BarChart3 className="w-5 h-5 mr-2 text-healing-blue" />
-                        Success Stories
+                        <Shirt className="w-5 h-5 mr-2 text-healing-green" />
+                        Virtual Wardrobe
                       </CardTitle>
                       <CardDescription>
-                        Read inspiring stories from our community
+                        Organize your clothes and plan outfits
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <Button variant="outline" className="w-full">
-                        Browse Stories
+                        Manage Wardrobe
                       </Button>
                     </CardContent>
                   </Card>
@@ -215,6 +219,13 @@ const Index = () => {
         <AuthScreen 
           onBack={handleBack}
           onAuthSuccess={handleAuthSuccess}
+        />
+      );
+    
+    case 'wardrobe':
+      return (
+        <VirtualWardrobeScreen 
+          onBack={handleBack}
         />
       );
     
