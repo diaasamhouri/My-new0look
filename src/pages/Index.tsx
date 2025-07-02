@@ -10,14 +10,16 @@ import { UserProfile } from '@/components/profile/UserProfile';
 import { StyleInsights } from '@/components/analytics/StyleInsights';
 import { AccessibilitySettings } from '@/components/accessibility/AccessibilitySettings';
 import { VirtualWardrobeScreen } from '@/components/wardrobe/VirtualWardrobeScreen';
+import { CommunityHubScreen } from '@/components/community/CommunityHubScreen';
+import { ShoppingIntegrationScreen } from '@/components/shopping/ShoppingIntegrationScreen';
 import { useAuth } from '@/hooks/useAuth';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { User, BarChart3, Settings, LogOut, Shirt } from 'lucide-react';
+import { User, BarChart3, Settings, LogOut, Shirt, Users, ShoppingCart } from 'lucide-react';
 
-type AppStage = 'welcome' | 'auth' | 'profile' | 'wardrobe' | 'image-setup' | 'personal-info' | 'generation' | 'results' | 'stories';
+type AppStage = 'welcome' | 'auth' | 'profile' | 'wardrobe' | 'community' | 'shopping' | 'image-setup' | 'personal-info' | 'generation' | 'results' | 'stories';
 
 interface PersonalInfo {
   gender: 'male' | 'female' | '';
@@ -107,6 +109,12 @@ const Index = () => {
       case 'wardrobe':
         setCurrentStage('welcome');
         break;
+      case 'community':
+        setCurrentStage('welcome');
+        break;
+      case 'shopping':
+        setCurrentStage('welcome');
+        break;
       case 'image-setup':
         setCurrentStage('welcome');
         break;
@@ -151,7 +159,7 @@ const Index = () => {
               </TabsList>
 
               <TabsContent value="dashboard" className="space-y-6">
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300" 
                         onClick={() => setCurrentStage('image-setup')}>
                     <CardHeader>
@@ -184,6 +192,60 @@ const Index = () => {
                     <CardContent>
                       <Button variant="outline" className="w-full">
                         Manage Wardrobe
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
+                        onClick={() => setCurrentStage('community')}>
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <Users className="w-5 h-5 mr-2 text-healing-blue" />
+                        Community Hub
+                      </CardTitle>
+                      <CardDescription>
+                        Connect and share with others
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button variant="outline" className="w-full">
+                        Join Community
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
+                        onClick={() => setCurrentStage('shopping')}>
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <ShoppingCart className="w-5 h-5 mr-2 text-warm-orange" />
+                        Shopping & Wishlist
+                      </CardTitle>
+                      <CardDescription>
+                        Discover adaptive fashion items
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button variant="outline" className="w-full">
+                        Browse Items
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
+                        onClick={() => setCurrentStage('stories')}>
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <BarChart3 className="w-5 h-5 mr-2 text-soft-pink" />
+                        Success Stories
+                      </CardTitle>
+                      <CardDescription>
+                        Read inspiring stories from our community
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button variant="outline" className="w-full">
+                        Browse Stories
                       </Button>
                     </CardContent>
                   </Card>
@@ -225,6 +287,20 @@ const Index = () => {
     case 'wardrobe':
       return (
         <VirtualWardrobeScreen 
+          onBack={handleBack}
+        />
+      );
+    
+    case 'community':
+      return (
+        <CommunityHubScreen 
+          onBack={handleBack}
+        />
+      );
+    
+    case 'shopping':
+      return (
+        <ShoppingIntegrationScreen 
           onBack={handleBack}
         />
       );
