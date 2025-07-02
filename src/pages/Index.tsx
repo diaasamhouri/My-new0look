@@ -54,11 +54,7 @@ const Index = () => {
   }
 
   const handleStartExperience = () => {
-    if (isAuthenticated) {
-      setCurrentStage('image-setup');
-    } else {
-      setCurrentStage('auth');
-    }
+    setCurrentStage('image-setup');
   };
 
   const handleAuthSuccess = () => {
@@ -147,27 +143,35 @@ const Index = () => {
           <LanguageSwitcher />
         </div>
         
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-4 sm:py-6 md:py-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-healing-purple to-healing-blue bg-clip-text text-transparent mb-4">
+            <div className="text-center mb-6 sm:mb-8">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-healing-purple to-healing-blue bg-clip-text text-transparent mb-3 sm:mb-4">
                 {t('welcome.title')}
               </h1>
-              <p className="text-muted-foreground text-lg">
+              <p className="text-muted-foreground text-base sm:text-lg">
                 {t('welcome.subtitle')}
               </p>
             </div>
 
-            <Tabs defaultValue="dashboard" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="dashboard">{t('navigation.home')}</TabsTrigger>
-                <TabsTrigger value="profile">{t('navigation.profile')}</TabsTrigger>
-                <TabsTrigger value="analytics">{t('navigation.analytics')}</TabsTrigger>
-                <TabsTrigger value="accessibility">{t('navigation.accessibility')}</TabsTrigger>
+            <Tabs defaultValue="dashboard" className="space-y-4 sm:space-y-6">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+                <TabsTrigger value="dashboard" className="text-xs sm:text-sm py-2 sm:py-3">
+                  {t('navigation.home')}
+                </TabsTrigger>
+                <TabsTrigger value="profile" className="text-xs sm:text-sm py-2 sm:py-3">
+                  {t('navigation.profile')}
+                </TabsTrigger>
+                <TabsTrigger value="analytics" className="text-xs sm:text-sm py-2 sm:py-3">
+                  {t('navigation.analytics')}
+                </TabsTrigger>
+                <TabsTrigger value="accessibility" className="text-xs sm:text-sm py-2 sm:py-3">
+                  {t('navigation.accessibility')}
+                </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="dashboard" className="space-y-6">
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <TabsContent value="dashboard" className="space-y-4 sm:space-y-6">
+                <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                   <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300" 
                         onClick={() => setCurrentStage('image-setup')}>
                     <CardHeader>
@@ -180,7 +184,7 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button className="w-full bg-healing-purple hover:bg-healing-purple/90">
+                      <Button className="w-full bg-healing-purple hover:bg-healing-purple/90 min-h-[44px] text-sm sm:text-base">
                         {t('welcome.getStarted')}
                       </Button>
                     </CardContent>
@@ -198,7 +202,7 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
                         Manage Wardrobe
                       </Button>
                     </CardContent>
@@ -216,7 +220,7 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
                         Join Community
                       </Button>
                     </CardContent>
@@ -234,7 +238,7 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
                         Browse Items
                       </Button>
                     </CardContent>
@@ -252,7 +256,7 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
                         Browse Stories
                       </Button>
                     </CardContent>

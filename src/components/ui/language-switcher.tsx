@@ -28,23 +28,23 @@ export const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Globe className="h-4 w-4" />
-          <span className="hidden sm:inline">
+        <Button variant="outline" size="sm" className="gap-2 min-h-[44px] px-3 py-2 sm:px-4">
+          <Globe className="h-4 w-4 flex-shrink-0" />
+          <span className="hidden sm:inline text-sm">
             {t('common.language')}
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-card border-border">
+      <DropdownMenuContent align="end" className="bg-card border-border z-50 min-w-[120px]">
         <DropdownMenuItem 
           onClick={() => changeLanguage('en')}
-          className={i18n.language === 'en' ? 'bg-accent' : ''}
+          className={`min-h-[44px] px-4 py-2 cursor-pointer ${i18n.language === 'en' ? 'bg-accent' : ''}`}
         >
           {t('common.english')}
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => changeLanguage('ar')}
-          className={i18n.language === 'ar' ? 'bg-accent' : ''}
+          className={`min-h-[44px] px-4 py-2 cursor-pointer ${i18n.language === 'ar' ? 'bg-accent' : ''}`}
         >
           {t('common.arabic')}
         </DropdownMenuItem>
