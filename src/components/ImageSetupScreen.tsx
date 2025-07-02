@@ -18,6 +18,7 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
   const [isLoading, setIsLoading] = useState(false);
   const [cameraError, setCameraError] = useState<string>('');
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [loadingTimeout, setLoadingTimeout] = useState<NodeJS.Timeout | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -28,6 +29,11 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
       setIsLoading(true);
       setCameraError('');
       setIsVideoReady(false);
+      
+      // Clear any existing timeout
+      if (loadingTimeout) {
+        clearTimeout(loadingTimeout);
+      }
       
       console.log('Starting camera with facingMode:', facingMode);
       
@@ -47,19 +53,61 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
       
       if (videoRef.current) {
         const video = videoRef.current;
-        video.srcObject = mediaStream;
         
-        video.onloadedmetadata = () => {
-          console.log('Video metadata loaded');
+        // Set up event handlers before assigning stream
+        const handleVideoReady = () => {
+          console.log('Video is ready');
           setIsLoading(false);
           setIsVideoReady(true);
+          if (loadingTimeout) {
+            clearTimeout(loadingTimeout);
+            setLoadingTimeout(null);
+          }
         };
         
-        video.onerror = (e) => {
+        const handleVideoError = (e: Event) => {
           console.error('Video error:', e);
           setCameraError('Failed to display camera feed');
           setIsLoading(false);
         };
+        
+        // Multiple event listeners for better compatibility
+        video.onloadedmetadata = () => {
+          console.log('Video metadata loaded');
+          handleVideoReady();
+        };
+        
+        video.oncanplay = () => {
+          console.log('Video can play');
+          handleVideoReady();
+        };
+        
+        video.onplaying = () => {
+          console.log('Video is playing');
+          handleVideoReady();
+        };
+        
+        video.onerror = handleVideoError;
+        
+        // Assign stream and play
+        video.srcObject = mediaStream;
+        
+        try {
+          await video.play();
+          console.log('Video play() called successfully');
+        } catch (playError) {
+          console.log('Video play() failed, but continuing:', playError);
+        }
+        
+        // Fallback timeout - hide loading after 4 seconds regardless
+        const timeout = setTimeout(() => {
+          console.log('Loading timeout reached - forcing video ready state');
+          setIsLoading(false);
+          setIsVideoReady(true);
+          setLoadingTimeout(null);
+        }, 4000);
+        
+        setLoadingTimeout(timeout);
       }
     } catch (error: any) {
       console.error('Camera error:', error);
