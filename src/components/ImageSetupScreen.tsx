@@ -6,6 +6,7 @@ import { CameraPreview } from "./camera/CameraPreview";
 import { CameraControls } from "./camera/CameraControls";
 import { PhotoPreview } from "./camera/PhotoPreview";
 import { UploadButton } from "./camera/UploadButton";
+import { useTranslation } from 'react-i18next';
 
 interface ImageSetupScreenProps {
   onImageCapture: (imageData: string) => void;
@@ -13,6 +14,7 @@ interface ImageSetupScreenProps {
 }
 
 export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenProps) => {
+  const { t } = useTranslation();
   const {
     cameraMode,
     capturedPhotos,
@@ -46,16 +48,15 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
             <div className="w-16 h-16 mx-auto bg-gradient-confidence rounded-full flex items-center justify-center animate-gentle-bounce">
               <Camera className="w-8 h-8 text-primary-foreground" />
             </div>
-            <h2 className="text-2xl font-bold text-foreground">Share Your Photo</h2>
+            <h2 className="text-2xl font-bold text-foreground">{t('imageSetup.sharePhoto')}</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Choose how you'd like to provide your image for personalized styling. 
-              Our AI will create beautiful looks just for you.
+              {t('imageSetup.chooseMethod')}
             </p>
             
             {/* Enhanced privacy reminder */}
             <div className="bg-gradient-to-r from-healing-green/10 to-healing-blue/10 rounded-lg p-3 border border-healing-green/20">
               <p className="text-xs text-foreground/80">
-                🔒 <span className="font-medium">Privacy Protected:</span> Your image is processed temporarily and automatically deleted
+                🔒 <span className="font-medium">{t('imageSetup.privacyProtected')}</span> {t('imageSetup.privacyDescription')}
               </p>
             </div>
           </div>
@@ -68,10 +69,10 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
                 className="w-full py-6 text-lg"
               >
                 <Camera className="w-6 h-6 mr-3" />
-                Take a Photo
+                {t('imageSetup.takeAPhoto')}
               </Button>
 
-              <div className="text-center text-sm text-muted-foreground">or</div>
+              <div className="text-center text-sm text-muted-foreground">{t('imageSetup.or')}</div>
 
               <UploadButton onFileUpload={handleFileUpload} />
             </div>
@@ -111,7 +112,7 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
             variant="ghost"
             className="w-full"
           >
-            Back to Welcome
+            {t('imageSetup.backToWelcome')}
           </Button>
           
           <canvas ref={canvasRef} className="hidden" />

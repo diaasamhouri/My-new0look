@@ -30,7 +30,22 @@
     "accessibilityNeeds": "احتياجات إمكانية الوصول",
     "selectNeeds": "اختر ما ينطبق عليك",
     "next": "التالي",
-    "skip": "تخطي"
+    "skip": "تخطي",
+    "tellUsAbout": "أخبرنا عن نفسك",
+    "helpsPerfectStyles": "هذا يساعدنا في إنشاء الأساليب المثالية لك",
+    "gender": "الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "amputationType": "نوع البتر",
+    "rightArm": "الذراع الأيمن",
+    "leftArm": "الذراع الأيسر",
+    "rightLeg": "الساق الأيمن",
+    "leftLeg": "الساق الأيسر",
+    "usesProsthetic": "هل تستخدم طرفاً صناعياً؟",
+    "yes": "نعم",
+    "no": "لا",
+    "generateStyles": "أنشئ أساليبي",
+    "backToPhoto": "العودة إلى الصورة"
   },
   "imageSetup": {
     "title": "رفع صورتك",
@@ -38,14 +53,44 @@
     "uploadPhoto": "رفع صورة",
     "takePhoto": "التقاط صورة",
     "continueWithoutPhoto": "المتابعة بدون صورة",
-    "next": "التالي"
+    "next": "التالي",
+    "sharePhoto": "شارك صورتك",
+    "chooseMethod": "اختر كيفية تقديم صورتك للحصول على التصميم الشخصي. سيقوم الذكاء الاصطناعي لدينا بإنشاء إطلالات جميلة خاصة بك.",
+    "privacyProtected": "الخصوصية محمية:",
+    "privacyDescription": "يتم معالجة صورتك مؤقتاً وحذفها تلقائياً",
+    "takeAPhoto": "التقط صورة",
+    "or": "أو",
+    "uploadExisting": "رفع صورة موجودة",
+    "bestPhotoTips": "أفضل نصائح للصور:",
+    "fullBodyBest": "صورة كاملة الجسم تعمل بشكل أفضل",
+    "goodLighting": "إضاءة جيدة وخلفية واضحة",
+    "standStraight": "قف مستقيماً مواجهاً للكاميرا",
+    "backToWelcome": "العودة إلى الترحيب"
+  },
+  "camera": {
+    "takePhoto": "التقط صورة",
+    "useThisPhoto": "استخدم هذه الصورة",
+    "retake": "إعادة التقاط",
+    "chooseBest": "اختر أفضل صورة لك:"
   },
   "outfitGeneration": {
     "title": "جاري إنشاء إطلالتك المثالية",
     "subtitle": "ذكاؤنا الاصطناعي يحلل تفضيلاتك وينشئ توصيات شخصية",
     "analyzing": "جاري تحليل تفضيلات أناقتك...",
     "generating": "جاري إنشاء تركيبات الإطلالات...",
-    "finalizing": "جاري إنهاء التوصيات..."
+    "finalizing": "جاري إنهاء التوصيات...",
+    "creatingLooks": "جاري إنشاء إطلالاتك",
+    "designingOutfits": "ذكاؤنا الاصطناعي يصمم إطلالات تحتفي بأسلوبك الفريد",
+    "analyzingPhoto": "جاري تحليل صورتك...",
+    "understandingStyle": "جاري فهم تفضيلات أسلوبك...",
+    "creatingFormal": "جاري إنشاء الإطلالات الرسمية...",
+    "designingCasual": "جاري تصميم الإطلالات غير الرسمية...",
+    "generatingSportswear": "جاري إنشاء خيارات الملابس الرياضية...",
+    "finalizingCollection": "جاري إنهاء مجموعتك الشخصية...",
+    "looksReady": "إطلالاتك جاهزة!",
+    "personalizedOutfits": "لقد أنشأنا {count} إطلالة شخصية خاصة بك",
+    "viewCompleteCollection": "عرض مجموعتك الكاملة",
+    "startOver": "البدء من جديد"
   },
   "results": {
     "title": "توصيات أناقتك",
@@ -53,7 +98,24 @@
     "saveOutfit": "حفظ الإطلالة",
     "shareOutfit": "مشاركة الإطلالة",
     "getMore": "المزيد من التوصيات",
-    "startOver": "البدء من جديد"
+    "startOver": "البدء من جديد",
+    "newLookCollection": "مجموعة إطلالاتك الجديدة",
+    "celebratingBeauty": "احتفالاً بجمالك وأسلوبك الفريد",
+    "downloadLook": "تحميل الإطلالة",
+    "share": "مشاركة",
+    "yourCollection": "مجموعتك",
+    "outfits": "إطلالات",
+    "hearStories": "استمع لقصص ملهمة",
+    "tryNewPhotos": "جرب صور جديدة",
+    "confidenceMessage": "مظهرك يعكس القوة، لكن جمالك الحقيقي ينبع من الداخل. استمر في التألق!",
+    "downloadStarted": "بدأ التحميل",
+    "downloadDescription": "جاري حفظ إطلالتك الشخصية على جهازك.",
+    "addedToFavorites": "أضيف للمفضلة",
+    "removedFromFavorites": "أزيل من المفضلة",
+    "outfitSaved": "حُفظت الإطلالة في مفضلاتك",
+    "outfitRemoved": "أُزيلت الإطلالة من مفضلاتك",
+    "thanksForFeedback": "شكراً لتقييمك!",
+    "improveFuture": "هذا يساعدنا في تحسين التوصيات المستقبلية."
   },
   "community": {
     "title": "مركز المجتمع",
@@ -72,6 +134,51 @@
     "adaptiveFashion": "الأزياء المتاحة",
     "recommendations": "التوصيات"
   },
+  "wardrobe": {
+    "description": "نظم ملابسك وخطط للإطلالات",
+    "manageWardrobe": "إدارة خزانة الملابس"
+  },
+  "dashboard": {
+    "joinCommunity": "انضم للمجتمع",
+    "browseItems": "تصفح العناصر",
+    "successStories": "قصص النجاح",
+    "browseStories": "تصفح القصص",
+    "readInspiring": "اقرأ قصص ملهمة من مجتمعنا"
+  },
+  "categories": {
+    "formal": "رسمي",
+    "casual": "غير رسمي",
+    "sportswear": "ملابس رياضية",
+    "traditional": "تقليدي",
+    "all": "الكل"
+  },
+  "filters": {
+    "category": "الفئة",
+    "sortBy": "ترتيب حسب",
+    "confidence": "الثقة",
+    "recent": "الأحدث",
+    "favoritesOnly": "المفضلة فقط"
+  },
+  "messages": {
+    "elegantProfessional": "إطلالة مهنية أنيقة بتصميم متاح",
+    "comfortableEveryday": "أسلوب يومي مريح يحتفي بك",
+    "activeWear": "ملابس نشطة مصممة لأسلوب حياتك",
+    "culturalAttire": "أزياء ثقافية مع إمكانية وصول حديثة",
+    "beautyHighlights": "هذا الأسلوب يبرز شخصيتك الواثقة بشكل جميل!",
+    "colorsComplement": "الألوان في هذه الإطلالة تكمل إشراقك الطبيعي بشكل مثالي.",
+    "showcasesStyle": "هذه الإطلالة تعرض حسك الفريد في الأناقة والرقي.",
+    "lookStunning": "تبدين مذهلة تماماً في هذا التصميم المدروس.",
+    "celebratesIndividuality": "هذه الإطلالة تحتفي بفرديتك وقوتك الداخلية."
+  },
+  "privacy": {
+    "privateTitle": "100% خاص",
+    "privateDescription": "الصور تُعالج مؤقتاً",
+    "aiPoweredTitle": "مدعوم بالذكاء الاصطناعي",
+    "aiPoweredDescription": "شخصي لك",
+    "privacyPriority": "خصوصيتك أولويتنا",
+    "privacyNotice": "الصور تُعالج محلياً ومؤقتاً. لا تُحفظ أو تُشارك أبداً.",
+    "inspirationalQuote": "الجمال يبدأ اللحظة التي تقرر فيها أن تكون نفسك."
+  },
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",
@@ -86,6 +193,7 @@
     "submit": "إرسال",
     "language": "اللغة",
     "english": "English",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "of": "من"
   }
 }

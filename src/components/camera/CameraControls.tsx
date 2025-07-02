@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { SwitchCamera, RotateCcw } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 interface CameraControlsProps {
   onCapture: () => void;
@@ -8,6 +9,8 @@ interface CameraControlsProps {
 }
 
 export const CameraControls = ({ onCapture, onSwitchCamera, onStopCamera }: CameraControlsProps) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="flex space-x-3">
       <Button
@@ -15,7 +18,7 @@ export const CameraControls = ({ onCapture, onSwitchCamera, onStopCamera }: Came
         variant="warm"
         className="flex-1 py-4"
       >
-        Take Photo
+        {t('camera.takePhoto')}
       </Button>
       
       <Button

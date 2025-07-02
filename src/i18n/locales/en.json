@@ -30,7 +30,22 @@
     "accessibilityNeeds": "Accessibility Needs",
     "selectNeeds": "Select any that apply",
     "next": "Next",
-    "skip": "Skip"
+    "skip": "Skip",
+    "tellUsAbout": "Tell Us About You",
+    "helpsPerfectStyles": "This helps us create the perfect styles for you",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "amputationType": "Amputation Type",
+    "rightArm": "Right Arm",
+    "leftArm": "Left Arm",
+    "rightLeg": "Right Leg",
+    "leftLeg": "Left Leg",
+    "usesProsthetic": "Do you use a prosthetic limb?",
+    "yes": "Yes",
+    "no": "No",
+    "generateStyles": "Generate My Styles",
+    "backToPhoto": "Back to Photo"
   },
   "imageSetup": {
     "title": "Upload Your Photo",
@@ -38,14 +53,44 @@
     "uploadPhoto": "Upload Photo",
     "takePhoto": "Take Photo",
     "continueWithoutPhoto": "Continue Without Photo",
-    "next": "Next"
+    "next": "Next",
+    "sharePhoto": "Share Your Photo",
+    "chooseMethod": "Choose how you'd like to provide your image for personalized styling. Our AI will create beautiful looks just for you.",
+    "privacyProtected": "Privacy Protected:",
+    "privacyDescription": "Your image is processed temporarily and automatically deleted",
+    "takeAPhoto": "Take a Photo",
+    "or": "or",
+    "uploadExisting": "Upload Existing Photo",
+    "bestPhotoTips": "Best Photo Tips:",
+    "fullBodyBest": "Full body photo works best",
+    "goodLighting": "Good lighting and clear background",
+    "standStraight": "Stand straight facing the camera",
+    "backToWelcome": "Back to Welcome"
+  },
+  "camera": {
+    "takePhoto": "Take Photo",
+    "useThisPhoto": "Use This Photo",
+    "retake": "Retake",
+    "chooseBest": "Choose your best photo:"
   },
   "outfitGeneration": {
     "title": "Generating Your Perfect Outfit",
     "subtitle": "Our AI is analyzing your preferences and creating personalized recommendations",
     "analyzing": "Analyzing your style preferences...",
     "generating": "Generating outfit combinations...",
-    "finalizing": "Finalizing recommendations..."
+    "finalizing": "Finalizing recommendations...",
+    "creatingLooks": "Creating Your Looks",
+    "designingOutfits": "Our AI is designing outfits that celebrate your unique style",
+    "analyzingPhoto": "Analyzing your photo...",
+    "understandingStyle": "Understanding your style preferences...",
+    "creatingFormal": "Creating formal looks...",
+    "designingCasual": "Designing casual outfits...",
+    "generatingSportswear": "Generating sportswear options...",
+    "finalizingCollection": "Finalizing your personalized collection...",
+    "looksReady": "Your Looks Are Ready!",
+    "personalizedOutfits": "We've created {count} personalized outfits just for you",
+    "viewCompleteCollection": "View Your Complete Collection",
+    "startOver": "Start Over"
   },
   "results": {
     "title": "Your Style Recommendations",
@@ -53,7 +98,24 @@
     "saveOutfit": "Save Outfit",
     "shareOutfit": "Share Outfit",
     "getMore": "Get More Recommendations",
-    "startOver": "Start Over"
+    "startOver": "Start Over",
+    "newLookCollection": "Your New Look Collection",
+    "celebratingBeauty": "Celebrating your unique beauty and style",
+    "downloadLook": "Download Look",
+    "share": "Share",
+    "yourCollection": "Your Collection",
+    "outfits": "outfits",
+    "hearStories": "Hear Inspiring Stories",
+    "tryNewPhotos": "Try New Photos",
+    "confidenceMessage": "Your appearance reflects strength, but your true beauty comes from within. Keep shining!",
+    "downloadStarted": "Download Started",
+    "downloadDescription": "Your personalized look is being saved to your device.",
+    "addedToFavorites": "Added to Favorites",
+    "removedFromFavorites": "Removed from Favorites",
+    "outfitSaved": "Outfit saved to your favorites",
+    "outfitRemoved": "Outfit removed from your favorites",
+    "thanksForFeedback": "Thanks for your feedback!",
+    "improveFuture": "This helps us improve future recommendations."
   },
   "community": {
     "title": "Community Hub",
@@ -72,6 +134,51 @@
     "adaptiveFashion": "Adaptive Fashion",
     "recommendations": "Recommendations"
   },
+  "wardrobe": {
+    "description": "Organize your clothes and plan outfits",
+    "manageWardrobe": "Manage Wardrobe"
+  },
+  "dashboard": {
+    "joinCommunity": "Join Community",
+    "browseItems": "Browse Items",
+    "successStories": "Success Stories",
+    "browseStories": "Browse Stories",
+    "readInspiring": "Read inspiring stories from our community"
+  },
+  "categories": {
+    "formal": "Formal",
+    "casual": "Casual",
+    "sportswear": "Sportswear",
+    "traditional": "Traditional",
+    "all": "All"
+  },
+  "filters": {
+    "category": "Category",
+    "sortBy": "Sort By",
+    "confidence": "Confidence",
+    "recent": "Recent",
+    "favoritesOnly": "Favorites Only"
+  },
+  "messages": {
+    "elegantProfessional": "Elegant professional look with adaptive design",
+    "comfortableEveryday": "Comfortable everyday style that celebrates you",
+    "activeWear": "Active wear designed for your lifestyle",
+    "culturalAttire": "Cultural attire with modern accessibility",
+    "beautyHighlights": "This style beautifully highlights your confident personality!",
+    "colorsComplement": "The colors in this outfit perfectly complement your natural radiance.",
+    "showcasesStyle": "This look showcases your unique sense of style and grace.",
+    "lookStunning": "You look absolutely stunning in this thoughtfully designed ensemble.",
+    "celebratesIndividuality": "This outfit celebrates your individuality and inner strength."
+  },
+  "privacy": {
+    "privateTitle": "100% Private",
+    "privateDescription": "Images processed temporarily",
+    "aiPoweredTitle": "AI Powered",
+    "aiPoweredDescription": "Personalized for you",
+    "privacyPriority": "Your privacy is our priority",
+    "privacyNotice": "Images are processed locally and temporarily. Never stored or shared.",
+    "inspirationalQuote": "Beauty begins the moment you decide to be yourself."
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
@@ -86,6 +193,7 @@
     "submit": "Submit",
     "language": "Language",
     "english": "English",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "of": "of"
   }
 }

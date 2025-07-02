@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Camera, Trash2 } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 interface PhotoPreviewProps {
   selectedPhoto: string;
@@ -18,6 +19,8 @@ export const PhotoPreview = ({
   onSelectPhoto, 
   onDeletePhoto 
 }: PhotoPreviewProps) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="space-y-4">
       <div className="relative bg-black rounded-lg overflow-hidden">
@@ -31,7 +34,7 @@ export const PhotoPreview = ({
       {/* Show captured photos if multiple */}
       {capturedPhotos.length > 1 && (
         <div className="space-y-2">
-          <p className="text-sm text-muted-foreground text-center">Choose your best photo:</p>
+          <p className="text-sm text-muted-foreground text-center">{t('camera.chooseBest')}</p>
           <div className="flex space-x-2 overflow-x-auto">
             {capturedPhotos.map((photo, index) => (
               <div key={index} className="relative flex-shrink-0">
@@ -64,7 +67,7 @@ export const PhotoPreview = ({
           className="flex-1 py-4"
         >
           <Check className="w-4 h-4 mr-2" />
-          Use This Photo
+          {t('camera.useThisPhoto')}
         </Button>
         
         <Button
@@ -73,7 +76,7 @@ export const PhotoPreview = ({
           className="py-4"
         >
           <Camera className="w-4 h-4 mr-2" />
-          Retake
+          {t('camera.retake')}
         </Button>
       </div>
     </div>
