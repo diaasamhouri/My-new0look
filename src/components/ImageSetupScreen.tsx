@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Camera, Upload, RotateCcw, SwitchCamera, Trash2, Check } from "lucide-react";
+import { Camera, Upload, RotateCcw, SwitchCamera, Trash2, Check, Loader } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ImageSetupScreenProps {
@@ -15,6 +15,9 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
   const [capturedPhotos, setCapturedPhotos] = useState<string[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<string>('');
   const [facingMode, setFacingMode] = useState<'user' | 'environment'>('user');
+  const [isLoading, setIsLoading] = useState(false);
+  const [cameraError, setCameraError] = useState<string>('');
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -22,19 +25,64 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
 
   const startCamera = async () => {
     try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode } 
-      });
+      setIsLoading(true);
+      setCameraError('');
+      setIsVideoReady(false);
+      
+      console.log('Starting camera with facingMode:', facingMode);
+      
+      const constraints = {
+        video: {
+          facingMode,
+          width: { ideal: 640 },
+          height: { ideal: 480 }
+        }
+      };
+      
+      const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+      console.log('Camera stream obtained:', mediaStream);
+      
       setStream(mediaStream);
       setCameraMode('live');
       
       if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
+        const video = videoRef.current;
+        video.srcObject = mediaStream;
+        
+        video.onloadedmetadata = () => {
+          console.log('Video metadata loaded');
+          setIsLoading(false);
+          setIsVideoReady(true);
+        };
+        
+        video.onerror = (e) => {
+          console.error('Video error:', e);
+          setCameraError('Failed to display camera feed');
+          setIsLoading(false);
+        };
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Camera error:', error);
+      setIsLoading(false);
+      
+      let errorMessage = "Camera access failed";
+      let description = "Please try uploading a photo instead.";
+      
+      if (error.name === 'NotAllowedError') {
+        errorMessage = "Camera Access Denied";
+        description = "Please allow camera access in your browser settings.";
+      } else if (error.name === 'NotFoundError') {
+        errorMessage = "No Camera Found";
+        description = "No camera device was found on your device.";
+      } else if (error.name === 'NotReadableError') {
+        errorMessage = "Camera In Use";
+        description = "Camera is being used by another application.";
+      }
+      
+      setCameraError(errorMessage);
       toast({
-        title: "Camera Access Denied",
-        description: "Please allow camera access or try uploading a photo instead.",
+        title: errorMessage,
+        description,
         variant: "destructive"
       });
     }
@@ -160,22 +208,53 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
                   ref={videoRef}
                   autoPlay
                   playsInline
+                  muted
+                  webkit-playsinline="true"
                   className="w-full h-64 object-cover"
                 />
                 
-                {/* Camera Guidelines */}
-                <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute top-4 left-4 right-4 bg-black/50 rounded p-2">
-                    <p className="text-white text-xs text-center">
-                      Stand 1-1.5 meters away • Center yourself • Good lighting
-                    </p>
+                {/* Loading overlay */}
+                {(isLoading || !isVideoReady) && (
+                  <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
+                    <div className="text-white text-center space-y-2">
+                      <Loader className="w-8 h-8 animate-spin mx-auto" />
+                      <p className="text-sm">Starting camera...</p>
+                    </div>
                   </div>
-                  
-                  {/* Center guide */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-32 h-40 border-2 border-white/50 rounded-lg"></div>
+                )}
+                
+                {/* Error overlay */}
+                {cameraError && (
+                  <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
+                    <div className="text-white text-center space-y-4 p-4">
+                      <p className="text-sm">{cameraError}</p>
+                      <Button
+                        onClick={startCamera}
+                        variant="outline"
+                        size="sm"
+                        className="text-black"
+                      >
+                        Try Again
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                )}
+                
+                {/* Camera Guidelines - only show when video is ready */}
+                {isVideoReady && !cameraError && (
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-4 left-4 right-4 bg-black/50 rounded p-2">
+                      <p className="text-white text-xs text-center">
+                        Stand 1-1.5 meters away • Center yourself • Good lighting
+                      </p>
+                    </div>
+                    
+                    {/* Center guide */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-32 h-40 border-2 border-white/50 rounded-lg"></div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="flex space-x-3">
