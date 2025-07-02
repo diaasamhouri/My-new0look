@@ -2,8 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, Share, Heart, Sparkles, RotateCcw, MessageCircle } from "lucide-react";
+import { Download, Share, Heart, Sparkles, RotateCcw, MessageCircle, Info, Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { OutfitDetailsModal } from "@/components/results/OutfitDetailsModal";
+import { OutfitFilters } from "@/components/results/OutfitFilters";
+import { SocialSharing } from "@/components/results/SocialSharing";
+import { useOutfitInteractions } from "@/hooks/useOutfitInteractions";
 
 interface Outfit {
   id: string;
@@ -21,7 +25,20 @@ interface ResultsScreenProps {
 
 export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScreenProps) => {
   const [selectedOutfit, setSelectedOutfit] = useState(outfits[0]);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [showSharingModal, setShowSharingModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [sortBy, setSortBy] = useState('confidence');
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const { toast } = useToast();
+  const { 
+    toggleFavorite, 
+    rateOutfit, 
+    addToViewHistory, 
+    getOutfitRating, 
+    isFavorite,
+    getRecommendations 
+  } = useOutfitInteractions();
 
   const handleDownload = () => {
     toast({
@@ -36,30 +53,50 @@ export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScre
     link.click();
   };
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'My New Look - AI Edition',
-          text: `Check out my ${selectedOutfit.category} style! ${selectedOutfit.description}`,
-          url: window.location.href
-        });
-      } catch (error) {
-        // Fallback to copying link
-        navigator.clipboard.writeText(window.location.href);
-        toast({
-          title: "Link Copied",
-          description: "Share link copied to clipboard!",
-        });
-      }
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      toast({
-        title: "Link Copied", 
-        description: "Share link copied to clipboard!",
-      });
-    }
+  const handleShare = () => {
+    setShowSharingModal(true);
   };
+
+  const handleOutfitSelect = (outfit: Outfit) => {
+    setSelectedOutfit(outfit);
+    addToViewHistory(outfit.id);
+  };
+
+  const handleToggleFavorite = () => {
+    toggleFavorite(selectedOutfit.id);
+    toast({
+      title: isFavorite(selectedOutfit.id) ? "Removed from Favorites" : "Added to Favorites",
+      description: isFavorite(selectedOutfit.id) ? "Outfit removed from your favorites" : "Outfit saved to your favorites",
+    });
+  };
+
+  const handleRateOutfit = (outfitId: string, rating: 'like' | 'dislike') => {
+    rateOutfit(outfitId, rating);
+    toast({
+      title: "Thanks for your feedback!",
+      description: "This helps us improve future recommendations.",
+    });
+  };
+
+  // Filter and sort outfits
+  const filteredOutfits = outfits.filter(outfit => {
+    if (selectedCategory !== 'all' && outfit.category !== selectedCategory) return false;
+    if (showFavoritesOnly && !isFavorite(outfit.id)) return false;
+    return true;
+  });
+
+  const sortedOutfits = [...filteredOutfits].sort((a, b) => {
+    switch (sortBy) {
+      case 'confidence':
+        return b.confidence - a.confidence;
+      case 'category':
+        return a.category.localeCompare(b.category);
+      case 'recent':
+        return 0; // Keep original order as "recent"
+      default:
+        return 0;
+    }
+  });
 
   const getRecommendation = () => {
     const recommendations = [
@@ -89,6 +126,16 @@ export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScre
           </div>
         </Card>
 
+        {/* Filters */}
+        <OutfitFilters
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          sortBy={sortBy}
+          onSortChange={setSortBy}
+          showFavoritesOnly={showFavoritesOnly}
+          onToggleFavorites={() => setShowFavoritesOnly(!showFavoritesOnly)}
+        />
+
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Main Image Display */}
           <div className="lg:col-span-2">
@@ -105,10 +152,19 @@ export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScre
                       {selectedOutfit.category}
                     </Badge>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <div className="bg-card/80 backdrop-blur-sm rounded-full p-2">
-                      <Heart className="w-5 h-5 text-healing-purple" />
-                    </div>
+                  <div className="absolute top-4 right-4 flex space-x-2">
+                    <button 
+                      onClick={handleToggleFavorite}
+                      className="bg-card/80 backdrop-blur-sm rounded-full p-2 hover:bg-card transition-colors"
+                    >
+                      <Heart className={`w-5 h-5 ${isFavorite(selectedOutfit.id) ? 'fill-current text-healing-purple' : 'text-healing-purple'}`} />
+                    </button>
+                    <button 
+                      onClick={() => setShowDetailsModal(true)}
+                      className="bg-card/80 backdrop-blur-sm rounded-full p-2 hover:bg-card transition-colors"
+                    >
+                      <Info className="w-5 h-5 text-healing-blue" />
+                    </button>
                   </div>
                 </div>
 
@@ -142,25 +198,43 @@ export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScre
             {/* Outfit Selection */}
             <Card className="bg-card/95 backdrop-blur-sm shadow-warm border-0">
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Your Collection</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {outfits.map((outfit) => (
-                    <button
-                      key={outfit.id}
-                      onClick={() => setSelectedOutfit(outfit)}
-                      className={`aspect-[3/4] rounded-lg overflow-hidden border-2 transition-all ${
-                        selectedOutfit.id === outfit.id 
-                          ? 'border-healing-purple shadow-gentle' 
-                          : 'border-transparent hover:border-healing-purple/50'
-                      }`}
-                    >
-                      <img 
-                        src={outfit.imageUrl}
-                        alt={outfit.description}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-foreground">Your Collection</h3>
+                  <Badge variant="secondary">{sortedOutfits.length} outfits</Badge>
+                </div>
+                <div className="grid grid-cols-2 gap-3 max-h-96 overflow-y-auto">
+                  {sortedOutfits.map((outfit) => {
+                    const isSelected = selectedOutfit.id === outfit.id;
+                    const isFav = isFavorite(outfit.id);
+                    
+                    return (
+                      <button
+                        key={outfit.id}
+                        onClick={() => handleOutfitSelect(outfit)}
+                        className={`aspect-[3/4] rounded-lg overflow-hidden border-2 transition-all relative ${
+                          isSelected 
+                            ? 'border-healing-purple shadow-gentle' 
+                            : 'border-transparent hover:border-healing-purple/50'
+                        }`}
+                      >
+                        <img 
+                          src={outfit.imageUrl}
+                          alt={outfit.description}
+                          className="w-full h-full object-cover"
+                        />
+                        {isFav && (
+                          <div className="absolute top-2 right-2">
+                            <Star className="w-4 h-4 fill-current text-healing-purple" />
+                          </div>
+                        )}
+                        <div className="absolute bottom-2 left-2">
+                          <Badge variant="secondary" className="text-xs bg-card/80 backdrop-blur-sm">
+                            {outfit.confidence}%
+                          </Badge>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </Card>
@@ -191,6 +265,20 @@ export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScre
             </Card>
           </div>
         </div>
+
+        {/* Modals */}
+        <OutfitDetailsModal
+          outfit={selectedOutfit}
+          isOpen={showDetailsModal}
+          onClose={() => setShowDetailsModal(false)}
+          onRate={handleRateOutfit}
+        />
+
+        <SocialSharing
+          outfit={selectedOutfit}
+          isOpen={showSharingModal}
+          onClose={() => setShowSharingModal(false)}
+        />
       </div>
     </div>
   );
