@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Camera, Upload, RotateCcw } from "lucide-react";
+import { Camera, Upload, RotateCcw, SwitchCamera, Trash2, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ImageSetupScreenProps {
@@ -10,8 +10,11 @@ interface ImageSetupScreenProps {
 }
 
 export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenProps) => {
-  const [cameraMode, setCameraMode] = useState<'none' | 'photo' | 'live'>('none');
+  const [cameraMode, setCameraMode] = useState<'none' | 'photo' | 'live' | 'preview'>('none');
   const [stream, setStream] = useState<MediaStream | null>(null);
+  const [capturedPhotos, setCapturedPhotos] = useState<string[]>([]);
+  const [selectedPhoto, setSelectedPhoto] = useState<string>('');
+  const [facingMode, setFacingMode] = useState<'user' | 'environment'>('user');
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +23,7 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
   const startCamera = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: 'user' } 
+        video: { facingMode } 
       });
       setStream(mediaStream);
       setCameraMode('live');
@@ -34,6 +37,17 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
         description: "Please allow camera access or try uploading a photo instead.",
         variant: "destructive"
       });
+    }
+  };
+
+  const switchCamera = async () => {
+    const newFacingMode = facingMode === 'user' ? 'environment' : 'user';
+    setFacingMode(newFacingMode);
+    
+    if (stream) {
+      stopCamera();
+      // Small delay to ensure camera is fully stopped
+      setTimeout(startCamera, 100);
     }
   };
 
@@ -57,8 +71,10 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
       if (ctx) {
         ctx.drawImage(video, 0, 0);
         const imageData = canvas.toDataURL('image/jpeg', 0.8);
+        setCapturedPhotos(prev => [...prev, imageData]);
+        setSelectedPhoto(imageData);
+        setCameraMode('preview');
         stopCamera();
-        onImageCapture(imageData);
       }
     }
   };
@@ -69,9 +85,28 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageData = e.target?.result as string;
-        onImageCapture(imageData);
+        setSelectedPhoto(imageData);
+        setCameraMode('preview');
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const confirmPhoto = () => {
+    if (selectedPhoto) {
+      onImageCapture(selectedPhoto);
+    }
+  };
+
+  const retakePhoto = () => {
+    setSelectedPhoto('');
+    setCameraMode('none');
+  };
+
+  const deletePhoto = (photoToDelete: string) => {
+    setCapturedPhotos(prev => prev.filter(photo => photo !== photoToDelete));
+    if (selectedPhoto === photoToDelete) {
+      setSelectedPhoto('');
     }
   };
 
@@ -153,11 +188,80 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
                 </Button>
                 
                 <Button
+                  onClick={switchCamera}
+                  variant="outline"
+                  className="py-4"
+                >
+                  <SwitchCamera className="w-4 h-4" />
+                </Button>
+                
+                <Button
                   onClick={stopCamera}
                   variant="outline"
                   className="py-4"
                 >
                   <RotateCcw className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {cameraMode === 'preview' && selectedPhoto && (
+            <div className="space-y-4">
+              <div className="relative bg-black rounded-lg overflow-hidden">
+                <img
+                  src={selectedPhoto}
+                  alt="Captured photo"
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+
+              {/* Show captured photos if multiple */}
+              {capturedPhotos.length > 1 && (
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground text-center">Choose your best photo:</p>
+                  <div className="flex space-x-2 overflow-x-auto">
+                    {capturedPhotos.map((photo, index) => (
+                      <div key={index} className="relative flex-shrink-0">
+                        <img
+                          src={photo}
+                          alt={`Photo ${index + 1}`}
+                          className={`w-16 h-16 object-cover rounded cursor-pointer border-2 ${
+                            selectedPhoto === photo ? 'border-primary' : 'border-transparent'
+                          }`}
+                          onClick={() => setSelectedPhoto(photo)}
+                        />
+                        <Button
+                          size="icon"
+                          variant="destructive"
+                          className="absolute -top-2 -right-2 w-5 h-5"
+                          onClick={() => deletePhoto(photo)}
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex space-x-3">
+                <Button
+                  onClick={confirmPhoto}
+                  variant="warm"
+                  className="flex-1 py-4"
+                >
+                  <Check className="w-4 h-4 mr-2" />
+                  Use This Photo
+                </Button>
+                
+                <Button
+                  onClick={retakePhoto}
+                  variant="outline"
+                  className="py-4"
+                >
+                  <Camera className="w-4 h-4 mr-2" />
+                  Retake
                 </Button>
               </div>
             </div>
