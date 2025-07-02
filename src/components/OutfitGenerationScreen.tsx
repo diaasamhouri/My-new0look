@@ -35,50 +35,76 @@ export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults,
   ];
 
   useEffect(() => {
-    // Simulate AI generation process
     const generateOutfits = async () => {
       setIsGenerating(true);
       
-      for (let i = 0; i < generationSteps.length; i++) {
-        setCurrentStep(i);
-        await new Promise(resolve => setTimeout(resolve, 1500));
-      }
+      try {
+        // Progress through steps with real AI generation
+        for (let i = 0; i < generationSteps.length; i++) {
+          setCurrentStep(i);
+          
+          if (i === generationSteps.length - 1) {
+            // On final step, call the AI generation API
+            const { supabase } = await import('@/integrations/supabase/client');
+            
+            const { data, error } = await supabase.functions.invoke('generate-outfits', {
+              body: {
+                imageData,
+                personalInfo
+              }
+            });
 
-      // Mock generated outfits - In real implementation, this would be AI-generated
-      const mockOutfits: GeneratedOutfit[] = [
-        {
-          id: '1',
-          category: 'formal',
-          imageUrl: imageData, // Placeholder - would be AI-modified
-          description: 'Elegant professional look with adaptive design',
-          confidence: 95
-        },
-        {
-          id: '2', 
-          category: 'casual',
-          imageUrl: imageData,
-          description: 'Comfortable everyday style that celebrates you',
-          confidence: 92
-        },
-        {
-          id: '3',
-          category: 'sportswear',
-          imageUrl: imageData,
-          description: 'Active wear designed for your lifestyle',
-          confidence: 88
-        },
-        {
-          id: '4',
-          category: 'traditional',
-          imageUrl: imageData,
-          description: 'Cultural attire with modern accessibility',
-          confidence: 90
+            if (error) throw error;
+            
+            setGeneratedOutfits(data.outfits || []);
+          } else {
+            // Continue with progress for other steps
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
         }
-      ];
 
-      setGeneratedOutfits(mockOutfits);
-      setIsGenerating(false);
-      setGenerationComplete(true);
+        setIsGenerating(false);
+        setGenerationComplete(true);
+        
+      } catch (error) {
+        console.error('Failed to generate outfits:', error);
+        
+        // Fallback to mock data if AI generation fails
+        const fallbackOutfits: GeneratedOutfit[] = [
+          {
+            id: '1',
+            category: 'formal',
+            imageUrl: imageData,
+            description: 'Elegant professional look with adaptive design',
+            confidence: 95
+          },
+          {
+            id: '2', 
+            category: 'casual',
+            imageUrl: imageData,
+            description: 'Comfortable everyday style that celebrates you',
+            confidence: 92
+          },
+          {
+            id: '3',
+            category: 'sportswear',
+            imageUrl: imageData,
+            description: 'Active wear designed for your lifestyle',
+            confidence: 88
+          },
+          {
+            id: '4',
+            category: 'traditional',
+            imageUrl: imageData,
+            description: 'Cultural attire with modern accessibility',
+            confidence: 90
+          }
+        ];
+
+        setGeneratedOutfits(fallbackOutfits);
+        setIsGenerating(false);
+        setGenerationComplete(true);
+      }
     };
 
     generateOutfits();

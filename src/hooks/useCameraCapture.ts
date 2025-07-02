@@ -178,15 +178,44 @@ export const useCameraCapture = () => {
     setCameraMode('none');
   }, []);
 
-  const handleFileUpload = useCallback((file: File) => {
+  const handleFileUpload = useCallback(async (file: File) => {
     if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const imageData = e.target?.result as string;
-        setSelectedPhoto(imageData);
-        setCameraMode('preview');
-      };
-      reader.readAsDataURL(file);
+      try {
+        // Import background removal functions
+        const { removeBackground, loadImage } = await import('@/lib/backgroundRemoval');
+        
+        try {
+          // Load and process the image with background removal
+          const imageElement = await loadImage(file);
+          const processedBlob = await removeBackground(imageElement);
+          
+          // Convert processed blob to data URL
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const imageData = e.target?.result as string;
+            setCapturedPhotos([imageData]);
+            setSelectedPhoto(imageData);
+            setCameraMode('preview');
+          };
+          reader.readAsDataURL(processedBlob);
+          
+        } catch (bgError) {
+          console.warn('Background removal failed, using original image:', bgError);
+          
+          // Fallback: use original image
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const imageData = e.target?.result as string;
+            setCapturedPhotos([imageData]);
+            setSelectedPhoto(imageData);
+            setCameraMode('preview');
+          };
+          reader.readAsDataURL(file);
+        }
+        
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
     }
   }, []);
 
