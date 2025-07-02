@@ -8,32 +8,32 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 248 250 252;
-    --foreground: 226 23% 11%;
+    --background: 0 0% 98%;
+    --foreground: 224 71% 4%;
 
-    --card: 255 255 255;
-    --card-foreground: 226 23% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
 
-    --popover: 255 255 255;
-    --popover-foreground: 226 23% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
 
     --primary: 262 83% 58%;
-    --primary-foreground: 248 250 252;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 226 23% 11%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 224 71% 4%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 215 20% 46%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 214 100% 97%;
-    --accent-foreground: 226 23% 11%;
+    --accent: 210 40% 94%;
+    --accent-foreground: 224 71% 4%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 248 250 252;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
     --ring: 262 83% 58%;
 
     /* Custom healing colors */
