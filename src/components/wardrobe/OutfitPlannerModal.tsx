@@ -206,7 +206,7 @@ export const OutfitPlannerModal = ({ isOpen, onClose, wardrobeItems }: OutfitPla
                         </Button>
                       </div>
                       <div className="grid grid-cols-3 gap-2">
-                        {(Array.isArray(suggestion.items) ? suggestion.items : []).slice(0, 3).map((itemId: string) => {
+                        {Array.isArray(suggestion.items) && suggestion.items.slice(0, 3).map((itemId: string) => {
                           const item = wardrobeItems.find(i => i.id === itemId);
                           return item ? (
                             <div key={itemId} className="text-center">
@@ -232,7 +232,7 @@ export const OutfitPlannerModal = ({ isOpen, onClose, wardrobeItems }: OutfitPla
               <div key={category} className="space-y-3">
                 <h4 className="font-medium capitalize">{category}</h4>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {items.map((item) => {
+                  {(items as any[]).map((item) => {
                     const isSelected = selectedItems.includes(item.id);
                     return (
                       <Card 
