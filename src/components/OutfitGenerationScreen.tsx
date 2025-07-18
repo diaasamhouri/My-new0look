@@ -1,12 +1,14 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Download, Share, Heart, RotateCcw } from "lucide-react";
+import { Sparkles, Heart, RotateCcw } from "lucide-react";
 
 interface OutfitGenerationScreenProps {
   imageData: string;
   personalInfo: any;
+  selectedStyles: string[];
   onViewResults: (outfits: any[]) => void;
   onBack: () => void;
 }
@@ -19,18 +21,37 @@ interface GeneratedOutfit {
   confidence: number;
 }
 
-export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults, onBack }: OutfitGenerationScreenProps) => {
+export const OutfitGenerationScreen = ({ 
+  imageData, 
+  personalInfo, 
+  selectedStyles, 
+  onViewResults, 
+  onBack 
+}: OutfitGenerationScreenProps) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationComplete, setGenerationComplete] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [generatedOutfits, setGeneratedOutfits] = useState<GeneratedOutfit[]>([]);
 
-  const generationSteps = [
+  // Dynamic generation steps based on selected styles
+  const baseSteps = [
     "Analyzing your photo...",
-    "Understanding your style preferences...",
-    "Creating formal looks...",
-    "Designing casual outfits...", 
-    "Generating sportswear options...",
+    "Understanding your style preferences..."
+  ];
+  
+  const styleSteps = selectedStyles.map(style => {
+    const styleNames = {
+      formal: "formal looks",
+      casual: "casual outfits", 
+      sportswear: "sportswear options",
+      traditional: "cultural attire"
+    };
+    return `Creating ${styleNames[style as keyof typeof styleNames]}...`;
+  });
+  
+  const generationSteps = [
+    ...baseSteps,
+    ...styleSteps,
     "Finalizing your personalized collection..."
   ];
 
@@ -50,16 +71,22 @@ export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults,
             const { data, error } = await supabase.functions.invoke('generate-outfits', {
               body: {
                 imageData,
-                personalInfo
+                personalInfo,
+                selectedStyles // Pass selected styles to limit generation
               }
             });
 
             if (error) throw error;
             
-            setGeneratedOutfits(data.outfits || []);
+            // Filter outfits to only include selected styles
+            const filteredOutfits = (data.outfits || []).filter(
+              (outfit: GeneratedOutfit) => selectedStyles.includes(outfit.category)
+            );
+            
+            setGeneratedOutfits(filteredOutfits);
           } else {
             // Continue with progress for other steps
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 1500));
           }
         }
 
@@ -69,37 +96,21 @@ export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults,
       } catch (error) {
         console.error('Failed to generate outfits:', error);
         
-        // Fallback to mock data if AI generation fails
-        const fallbackOutfits: GeneratedOutfit[] = [
-          {
-            id: '1',
-            category: 'formal',
-            imageUrl: imageData,
-            description: 'Elegant professional look with adaptive design',
-            confidence: 95
-          },
-          {
-            id: '2', 
-            category: 'casual',
-            imageUrl: imageData,
-            description: 'Comfortable everyday style that celebrates you',
-            confidence: 92
-          },
-          {
-            id: '3',
-            category: 'sportswear',
-            imageUrl: imageData,
-            description: 'Active wear designed for your lifestyle',
-            confidence: 88
-          },
-          {
-            id: '4',
-            category: 'traditional',
-            imageUrl: imageData,
-            description: 'Cultural attire with modern accessibility',
-            confidence: 90
-          }
-        ];
+        // Fallback to mock data for selected styles only
+        const styleDescriptions = {
+          formal: 'Elegant professional look with adaptive design',
+          casual: 'Comfortable everyday style that celebrates you', 
+          sportswear: 'Active wear designed for your lifestyle',
+          traditional: 'Cultural attire with modern accessibility'
+        };
+
+        const fallbackOutfits: GeneratedOutfit[] = selectedStyles.map((style, index) => ({
+          id: `${style}-${Date.now()}-${index}`,
+          category: style as 'formal' | 'casual' | 'sportswear' | 'traditional',
+          imageUrl: imageData,
+          description: styleDescriptions[style as keyof typeof styleDescriptions],
+          confidence: 88 + Math.floor(Math.random() * 12) // 88-100% confidence
+        }));
 
         setGeneratedOutfits(fallbackOutfits);
         setIsGenerating(false);
@@ -108,7 +119,7 @@ export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults,
     };
 
     generateOutfits();
-  }, [imageData, personalInfo]);
+  }, [imageData, personalInfo, selectedStyles]);
 
   const handleViewResults = () => {
     onViewResults(generatedOutfits);
@@ -126,7 +137,7 @@ export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults,
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-foreground">Creating Your Looks</h2>
               <p className="text-muted-foreground">
-                Our AI is designing outfits that celebrate your unique style
+                Our AI is designing {selectedStyles.length} outfit{selectedStyles.length > 1 ? 's' : ''} that celebrate your unique style
               </p>
             </div>
 
@@ -164,7 +175,7 @@ export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults,
             <div>
               <h2 className="text-2xl font-bold text-foreground">Your Looks Are Ready!</h2>
               <p className="text-muted-foreground mt-2">
-                We've created {generatedOutfits.length} personalized outfits just for you
+                We've created {generatedOutfits.length} personalized outfit{generatedOutfits.length > 1 ? 's' : ''} just for you
               </p>
             </div>
           </div>
@@ -180,7 +191,7 @@ export const OutfitGenerationScreen = ({ imageData, personalInfo, onViewResults,
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-2 left-2 right-2">
-                    <Badge variant="secondary" className="text-xs mb-1">
+                    <Badge variant="secondary" className="text-xs mb-1 capitalize">
                       {outfit.category}
                     </Badge>
                     <p className="text-white text-xs font-medium">

@@ -29,11 +29,14 @@ export const useCameraCapture = () => {
       
       console.log('Starting camera with facingMode:', facingMode);
       
+      // Enhanced constraints for better mobile experience
+      const isMobile = window.innerWidth <= 768;
       const constraints = {
         video: {
           facingMode,
-          width: { ideal: 640 },
-          height: { ideal: 480 }
+          width: { ideal: isMobile ? 720 : 640 },
+          height: { ideal: isMobile ? 960 : 480 },
+          frameRate: { ideal: 30 }
         }
       };
       

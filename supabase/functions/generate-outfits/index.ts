@@ -13,6 +13,7 @@ interface OutfitRequest {
     amputationType: 'right-arm' | 'left-arm' | 'right-leg' | 'left-leg';
     usesProsthetic: 'yes' | 'no';
   };
+  selectedStyles?: string[]; // New optional parameter for selected styles
 }
 
 interface GeneratedOutfit {
@@ -30,7 +31,7 @@ serve(async (req) => {
   }
 
   try {
-    const { imageData, personalInfo }: OutfitRequest = await req.json()
+    const { imageData, personalInfo, selectedStyles }: OutfitRequest = await req.json()
     
     const HUGGING_FACE_TOKEN = Deno.env.get('HUGGING_FACE_ACCESS_TOKEN')
     if (!HUGGING_FACE_TOKEN) {
@@ -39,12 +40,16 @@ serve(async (req) => {
 
     const hf = new HfInference(HUGGING_FACE_TOKEN)
     console.log('Starting outfit generation for:', personalInfo)
+    console.log('Selected styles:', selectedStyles)
 
-    // Generate outfits for different categories
-    const categories = ['formal', 'casual', 'sportswear', 'traditional'] as const
+    // Use selected styles or default to all categories
+    const categoriesToGenerate = selectedStyles && selectedStyles.length > 0 
+      ? selectedStyles as ('formal' | 'casual' | 'sportswear' | 'traditional')[]
+      : ['formal', 'casual', 'sportswear', 'traditional'] as const
+
     const outfits: GeneratedOutfit[] = []
 
-    for (const category of categories) {
+    for (const category of categoriesToGenerate) {
       try {
         const prompt = createAmputationAwarePrompt(category, personalInfo)
         console.log(`Generating ${category} outfit with prompt:`, prompt)

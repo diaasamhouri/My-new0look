@@ -4,6 +4,7 @@ import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { LanguageSwitcher } from '@/components/ui/language-switcher';
 import { ImageSetupScreen } from '@/components/ImageSetupScreen';
 import { PersonalInfoScreen } from '@/components/PersonalInfoScreen';
+import { StyleSelectionScreen } from '@/components/StyleSelectionScreen';
 import { OutfitGenerationScreen } from '@/components/OutfitGenerationScreen';
 import { ResultsScreen } from '@/components/ResultsScreen';
 import { StoriesScreen } from '@/components/StoriesScreen';
@@ -21,7 +22,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { User, BarChart3, Settings, LogOut, Shirt, Users, ShoppingCart } from 'lucide-react';
 
-type AppStage = 'welcome' | 'auth' | 'profile' | 'wardrobe' | 'community' | 'shopping' | 'image-setup' | 'personal-info' | 'generation' | 'results' | 'stories';
+type AppStage = 'welcome' | 'auth' | 'profile' | 'wardrobe' | 'community' | 'shopping' | 'image-setup' | 'personal-info' | 'style-selection' | 'generation' | 'results' | 'stories';
 
 interface PersonalInfo {
   gender: 'male' | 'female' | '';
@@ -40,6 +41,7 @@ const Index = () => {
     amputationType: '',
     usesProsthetic: ''
   });
+  const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
   const [generatedOutfits, setGeneratedOutfits] = useState<any[]>([]);
 
   if (authLoading) {
@@ -68,6 +70,11 @@ const Index = () => {
 
   const handleInfoSubmit = (info: PersonalInfo) => {
     setPersonalInfo(info);
+    setCurrentStage('style-selection');
+  };
+
+  const handleStylesSelected = (styles: string[]) => {
+    setSelectedStyles(styles);
     setCurrentStage('generation');
   };
 
@@ -94,6 +101,7 @@ const Index = () => {
     setCurrentStage('welcome');
     setImageData('');
     setPersonalInfo({ gender: '', amputationType: '', usesProsthetic: '' });
+    setSelectedStyles([]);
     setGeneratedOutfits([]);
   };
 
@@ -120,8 +128,11 @@ const Index = () => {
       case 'personal-info':
         setCurrentStage('image-setup');
         break;
-      case 'generation':
+      case 'style-selection':
         setCurrentStage('personal-info');
+        break;
+      case 'generation':
+        setCurrentStage('style-selection');
         break;
       case 'results':
         setCurrentStage('generation');
@@ -333,11 +344,20 @@ const Index = () => {
         />
       );
     
+    case 'style-selection':
+      return (
+        <StyleSelectionScreen 
+          onStylesSelected={handleStylesSelected}
+          onBack={handleBack}
+        />
+      );
+    
     case 'generation':
       return (
         <OutfitGenerationScreen 
           imageData={imageData}
           personalInfo={personalInfo}
+          selectedStyles={selectedStyles}
           onViewResults={handleViewResults}
           onBack={handleBack}
         />
