@@ -46,9 +46,9 @@ const Index = () => {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-background/95 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-healing-purple mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading...</p>
         </div>
       </div>
@@ -148,46 +148,46 @@ const Index = () => {
   // Render profile/settings screens for authenticated users
   if (isAuthenticated && currentStage === 'welcome') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-background/95">
+      <div className="min-h-screen bg-background">
         {/* Language Switcher */}
         <div className="absolute top-4 right-4">
           <LanguageSwitcher />
         </div>
         
-        <div className="container mx-auto px-4 py-4 sm:py-6 md:py-8">
+        <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6 sm:mb-8">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-healing-purple to-healing-blue bg-clip-text text-transparent mb-3 sm:mb-4">
+            <div className="text-center mb-8">
+              <h1 className="text-4xl font-bold text-foreground mb-4">
                 {t('welcome.title')}
               </h1>
-              <p className="text-muted-foreground text-base sm:text-lg">
+              <p className="text-muted-foreground text-lg">
                 {t('welcome.subtitle')}
               </p>
             </div>
 
-            <Tabs defaultValue="dashboard" className="space-y-4 sm:space-y-6">
+            <Tabs defaultValue="dashboard" className="space-y-6">
               <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
-                <TabsTrigger value="dashboard" className="text-xs sm:text-sm py-2 sm:py-3">
+                <TabsTrigger value="dashboard" className="text-sm py-3">
                   {t('navigation.home')}
                 </TabsTrigger>
-                <TabsTrigger value="profile" className="text-xs sm:text-sm py-2 sm:py-3">
+                <TabsTrigger value="profile" className="text-sm py-3">
                   {t('navigation.profile')}
                 </TabsTrigger>
-                <TabsTrigger value="analytics" className="text-xs sm:text-sm py-2 sm:py-3">
+                <TabsTrigger value="analytics" className="text-sm py-3">
                   {t('navigation.analytics')}
                 </TabsTrigger>
-                <TabsTrigger value="accessibility" className="text-xs sm:text-sm py-2 sm:py-3">
+                <TabsTrigger value="accessibility" className="text-sm py-3">
                   {t('navigation.accessibility')}
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="dashboard" className="space-y-4 sm:space-y-6">
-                <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300" 
+              <TabsContent value="dashboard" className="space-y-6">
+                <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                  <Card className="cursor-pointer hover:shadow-md transition-shadow duration-200" 
                         onClick={() => setCurrentStage('image-setup')}>
                     <CardHeader>
                       <CardTitle className="flex items-center">
-                        <User className="w-5 h-5 mr-2 text-healing-purple" />
+                        <User className="w-5 h-5 mr-2 text-primary" />
                         {t('results.title')}
                       </CardTitle>
                       <CardDescription>
@@ -195,17 +195,17 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button className="w-full bg-healing-purple hover:bg-healing-purple/90 min-h-[44px] text-sm sm:text-base">
+                      <Button className="w-full bg-primary hover:bg-primary/90 min-h-[44px]">
                         {t('welcome.getStarted')}
                       </Button>
                     </CardContent>
                   </Card>
 
-                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
+                  <Card className="cursor-pointer hover:shadow-md transition-shadow duration-200"
                         onClick={() => setCurrentStage('wardrobe')}>
                     <CardHeader>
                       <CardTitle className="flex items-center">
-                        <Shirt className="w-5 h-5 mr-2 text-healing-green" />
+                        <Shirt className="w-5 h-5 mr-2 text-primary" />
                         {t('navigation.wardrobe')}
                       </CardTitle>
                       <CardDescription>
@@ -213,17 +213,17 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
+                      <Button variant="outline" className="w-full min-h-[44px]">
                         Manage Wardrobe
                       </Button>
                     </CardContent>
                   </Card>
 
-                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
+                  <Card className="cursor-pointer hover:shadow-md transition-shadow duration-200"
                         onClick={() => setCurrentStage('community')}>
                     <CardHeader>
                       <CardTitle className="flex items-center">
-                        <Users className="w-5 h-5 mr-2 text-healing-blue" />
+                        <Users className="w-5 h-5 mr-2 text-primary" />
                         {t('navigation.community')}
                       </CardTitle>
                       <CardDescription>
@@ -231,17 +231,17 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
+                      <Button variant="outline" className="w-full min-h-[44px]">
                         Join Community
                       </Button>
                     </CardContent>
                   </Card>
 
-                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
+                  <Card className="cursor-pointer hover:shadow-md transition-shadow duration-200"
                         onClick={() => setCurrentStage('shopping')}>
                     <CardHeader>
                       <CardTitle className="flex items-center">
-                        <ShoppingCart className="w-5 h-5 mr-2 text-warm-orange" />
+                        <ShoppingCart className="w-5 h-5 mr-2 text-primary" />
                         {t('navigation.shopping')}
                       </CardTitle>
                       <CardDescription>
@@ -249,17 +249,17 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
+                      <Button variant="outline" className="w-full min-h-[44px]">
                         Browse Items
                       </Button>
                     </CardContent>
                   </Card>
 
-                  <Card className="cursor-pointer hover:shadow-warm transition-shadow duration-300"
+                  <Card className="cursor-pointer hover:shadow-md transition-shadow duration-200"
                         onClick={() => setCurrentStage('stories')}>
                     <CardHeader>
                       <CardTitle className="flex items-center">
-                        <BarChart3 className="w-5 h-5 mr-2 text-soft-pink" />
+                        <BarChart3 className="w-5 h-5 mr-2 text-primary" />
                         Success Stories
                       </CardTitle>
                       <CardDescription>
@@ -267,7 +267,7 @@ const Index = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline" className="w-full min-h-[44px] text-sm sm:text-base">
+                      <Button variant="outline" className="w-full min-h-[44px]">
                         Browse Stories
                       </Button>
                     </CardContent>

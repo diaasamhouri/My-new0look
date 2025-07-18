@@ -1,108 +1,81 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Simplified design system with minimal colors */
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 224 71% 4%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
+    --card-foreground: 0 0% 9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
+    --popover-foreground: 0 0% 9%;
 
-    --primary: 262 83% 58%;
+    --primary: 220 13% 18%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 224 71% 4%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 94%;
-    --accent-foreground: 224 71% 4%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 262 83% 58%;
-
-    /* Custom healing colors */
-    --healing-purple: 262 83% 58%;
-    --healing-blue: 217 91% 60%;
-    --healing-green: 142 71% 45%;
-    --warm-orange: 25 95% 53%;
-    --soft-pink: 336 84% 77%;
-    
-    /* Gradients */
-    --gradient-healing: linear-gradient(135deg, hsl(var(--healing-purple)), hsl(var(--healing-blue)));
-    --gradient-warm: linear-gradient(135deg, hsl(var(--warm-orange)), hsl(var(--soft-pink)));
-    --gradient-confidence: linear-gradient(135deg, hsl(var(--healing-blue)), hsl(var(--healing-green)));
-    
-    /* Shadows */
-    --shadow-gentle: 0 4px 20px -2px hsl(var(--healing-purple) / 0.1);
-    --shadow-warm: 0 8px 32px -4px hsl(var(--healing-blue) / 0.15);
-    
-    /* Animations */
-    --transition-gentle: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 220 13% 18%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -143,18 +116,6 @@ All colors MUST be HSL.
   .enhanced-focus *:focus {
     outline: 3px solid hsl(var(--ring));
     outline-offset: 2px;
-  }
-
-  [data-colorblind-mode="protanopia"] {
-    filter: url('#protanopia-filter');
-  }
-
-  [data-colorblind-mode="deuteranopia"] {
-    filter: url('#deuteranopia-filter');
-  }
-
-  [data-colorblind-mode="tritanopia"] {
-    filter: url('#tritanopia-filter');
   }
 
   /* Dynamic font sizing */
