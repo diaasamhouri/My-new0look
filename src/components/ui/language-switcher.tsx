@@ -71,7 +71,6 @@ export const LanguageSwitcher = () => {
       <DropdownMenuContent 
         align="end" 
         className="bg-card border-border z-50 min-w-[140px] shadow-lg"
-        dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
       >
         <DropdownMenuItem 
           onClick={() => changeLanguage('en')}
