@@ -65,7 +65,7 @@ export const ImageSetupScreen = ({ onImageCapture, onBack }: ImageSetupScreenPro
             <div className="space-y-4">
               <Button
                 onClick={startCamera}
-                variant="healing"
+                variant="default"
                 className="w-full py-6 text-lg"
               >
                 <Camera className="w-6 h-6 mr-3" />

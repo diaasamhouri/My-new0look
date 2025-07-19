@@ -206,7 +206,7 @@ export const OutfitGenerationScreen = ({
           <div className="space-y-3">
             <Button
               onClick={handleViewResults}
-              variant="warm"
+              variant="default"
               className="w-full py-6 text-lg"
             >
               View Your Complete Collection

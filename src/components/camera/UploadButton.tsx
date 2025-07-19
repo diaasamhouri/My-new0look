@@ -23,7 +23,7 @@ export const UploadButton = ({ onFileUpload }: UploadButtonProps) => {
       <div className="space-y-3">
         <Button
           onClick={() => fileInputRef.current?.click()}
-          variant="confidence"
+          variant="secondary"
           className="w-full py-6 text-lg"
         >
           <Upload className="w-6 h-6 mr-3" />

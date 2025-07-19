@@ -115,7 +115,7 @@ export const PersonalInfoScreen = ({ onInfoSubmit, onBack }: PersonalInfoScreenP
             <Button
               onClick={handleSubmit}
               disabled={!isFormValid}
-              variant="confidence"
+              variant="default"
               className="w-full py-6 text-lg"
             >
               {t('personalInfo.generateStyles')}

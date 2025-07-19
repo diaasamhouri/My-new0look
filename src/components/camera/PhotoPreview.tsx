@@ -63,7 +63,7 @@ export const PhotoPreview = ({
       <div className="flex space-x-3">
         <Button
           onClick={onConfirm}
-          variant="warm"
+          variant="default"
           className="flex-1 py-4"
         >
           <Check className="w-4 h-4 mr-2" />

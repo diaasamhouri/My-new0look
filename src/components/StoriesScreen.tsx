@@ -159,7 +159,7 @@ export const StoriesScreen = ({ onBack, onRestart }: StoriesScreenProps) => {
 
           {/* Action Buttons */}
           <div className="space-y-3 pt-4 border-t border-border">
-            <Button onClick={onRestart} variant="warm" className="w-full">
+            <Button onClick={onRestart} variant="default" className="w-full">
               Start Your New Experience
             </Button>
             

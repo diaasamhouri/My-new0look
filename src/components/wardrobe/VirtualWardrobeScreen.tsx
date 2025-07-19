@@ -82,7 +82,7 @@ export const VirtualWardrobeScreen = ({ onBack }: VirtualWardrobeScreenProps) =>
                 </Button>
                 <Button 
                   onClick={handleGenerateOutfits}
-                  variant="confidence"
+                  variant="secondary"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   Smart Outfits
@@ -218,7 +218,7 @@ export const VirtualWardrobeScreen = ({ onBack }: VirtualWardrobeScreenProps) =>
                   </p>
                   <Button 
                     onClick={handleGenerateOutfits}
-                    variant="confidence"
+                    variant="secondary"
                   >
                     <Sparkles className="w-4 h-4 mr-2" />
                     Generate Smart Outfits

@@ -179,11 +179,11 @@ export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScre
                   </div>
 
                   <div className="flex space-x-3">
-                    <Button onClick={handleDownload} variant="healing" className="flex-1">
+                    <Button onClick={handleDownload} variant="default" className="flex-1">
                       <Download className="w-4 h-4 mr-2" />
                       Download Look
                     </Button>
-                    <Button onClick={handleShare} variant="confidence" className="flex-1">
+                    <Button onClick={handleShare} variant="secondary" className="flex-1">
                       <Share className="w-4 h-4 mr-2" />
                       Share
                     </Button>
@@ -242,7 +242,7 @@ export const ResultsScreen = ({ outfits, onRestart, onShowStories }: ResultsScre
             {/* Action Buttons */}
             <Card className="bg-card/95 backdrop-blur-sm shadow-warm border-0">
               <div className="p-4 space-y-3">
-                <Button onClick={onShowStories} variant="warm" className="w-full">
+                <Button onClick={onShowStories} variant="default" className="w-full">
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Hear Inspiring Stories
                 </Button>

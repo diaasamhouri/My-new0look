@@ -15,7 +15,7 @@ export const CameraControls = ({ onCapture, onSwitchCamera, onStopCamera }: Came
     <div className="flex space-x-3">
       <Button
         onClick={onCapture}
-        variant="warm"
+        variant="default"
         className="flex-1 py-4"
       >
         {t('camera.takePhoto')}
