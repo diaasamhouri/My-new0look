@@ -1,8 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Filter, Star, TrendingUp, Calendar } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 interface OutfitFiltersProps {
   selectedCategory: string;
@@ -21,22 +23,24 @@ export const OutfitFilters = ({
   showFavoritesOnly,
   onToggleFavorites
 }: OutfitFiltersProps) => {
+  const { t } = useTranslation();
+
   const categories = [
-    { id: 'all', label: 'All Styles', icon: Filter },
-    { id: 'formal', label: 'Formal', icon: TrendingUp },
-    { id: 'casual', label: 'Casual', icon: Calendar },
-    { id: 'sportswear', label: 'Sportswear', icon: Calendar },
-    { id: 'traditional', label: 'Traditional', icon: Star }
+    { id: 'all', label: t('categories.all'), icon: Filter },
+    { id: 'formal', label: t('categories.formal'), icon: TrendingUp },
+    { id: 'casual', label: t('categories.casual'), icon: Calendar },
+    { id: 'sportswear', label: t('categories.sportswear'), icon: Calendar },
+    { id: 'traditional', label: t('categories.traditional'), icon: Star }
   ];
 
   return (
-    <Card className="bg-card/95 backdrop-blur-sm shadow-warm border-0 mb-6">
+    <Card className="bg-card/95 backdrop-blur-sm shadow-sm border mb-6">
       <div className="p-4 space-y-4">
         {/* Category Filters */}
         <div>
           <h3 className="text-sm font-medium text-foreground mb-3 flex items-center">
-            <Filter className="w-4 h-4 mr-2 text-healing-purple" />
-            Filter by Style
+            <Filter className="w-4 h-4 mr-2 text-primary" />
+            {t('filters.category')}
           </h3>
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => {
@@ -49,7 +53,7 @@ export const OutfitFilters = ({
                   variant={isSelected ? "default" : "outline"}
                   size="sm"
                   onClick={() => onCategoryChange(category.id)}
-                  className={`${isSelected ? 'bg-healing-purple hover:bg-healing-purple/90' : ''}`}
+                  className={`transition-all ${isSelected ? 'shadow-sm' : ''}`}
                 >
                   <Icon className="w-3 h-3 mr-1" />
                   {category.label}
@@ -60,17 +64,17 @@ export const OutfitFilters = ({
         </div>
 
         {/* Sort and Additional Filters */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center space-x-2">
-            <label className="text-sm font-medium">Sort by:</label>
+            <label className="text-sm font-medium">{t('filters.sortBy')}:</label>
             <Select value={sortBy} onValueChange={onSortChange}>
               <SelectTrigger className="w-40">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="confidence">Confidence</SelectItem>
-                <SelectItem value="category">Category</SelectItem>
-                <SelectItem value="recent">Most Recent</SelectItem>
+                <SelectItem value="confidence">{t('filters.confidence')}</SelectItem>
+                <SelectItem value="category">{t('filters.category')}</SelectItem>
+                <SelectItem value="recent">{t('filters.recent')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -79,25 +83,25 @@ export const OutfitFilters = ({
             variant={showFavoritesOnly ? "default" : "outline"}
             size="sm"
             onClick={onToggleFavorites}
-            className={`${showFavoritesOnly ? 'bg-healing-purple hover:bg-healing-purple/90' : ''}`}
+            className="transition-all"
           >
             <Star className={`w-4 h-4 mr-2 ${showFavoritesOnly ? 'fill-current' : ''}`} />
-            Favorites Only
+            {t('filters.favoritesOnly')}
           </Button>
         </div>
 
         {/* Active Filters Display */}
         {(selectedCategory !== 'all' || showFavoritesOnly) && (
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-muted-foreground">Active filters:</span>
+          <div className="flex items-center space-x-2 flex-wrap gap-2">
+            <span className="text-sm text-muted-foreground">{t('common.select')}:</span>
             {selectedCategory !== 'all' && (
               <Badge variant="secondary" className="capitalize">
-                {selectedCategory}
+                {categories.find(cat => cat.id === selectedCategory)?.label}
               </Badge>
             )}
             {showFavoritesOnly && (
               <Badge variant="secondary">
-                Favorites
+                {t('filters.favoritesOnly')}
               </Badge>
             )}
           </div>

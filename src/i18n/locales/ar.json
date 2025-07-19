@@ -1,9 +1,10 @@
+
 {
   "welcome": {
-    "title": "مرحباً بك في StyleAI",
+    "title": "مرحباً بك في إطلالتي الجديدة",
     "subtitle": "مساعدك الذكي للأناقة المتاحة",
     "description": "اكتشف إطلالات تحتفي بأسلوبك الفريد واحتياجاتك للإتاحة. قم برفع صورتك أو وصف تفضيلاتك للحصول على توصيات شخصية للإطلالات.",
-    "getStarted": "ابدأ الآن",
+    "getStarted": "ابدأ التجربة",
     "learnMore": "اعرف أكثر"
   },
   "navigation": {
@@ -65,13 +66,33 @@
     "fullBodyBest": "صورة كاملة الجسم تعمل بشكل أفضل",
     "goodLighting": "إضاءة جيدة وخلفية واضحة",
     "standStraight": "قف مستقيماً مواجهاً للكاميرا",
-    "backToWelcome": "العودة إلى الترحيب"
+    "backToWelcome": "العودة إلى الترحيب",
+    "cameraInstructions": "توجيهات الكاميرا",
+    "standDistance": "يرجى الوقوف على بعد مناسب (1-1.5 متر)",
+    "centerFrame": "احرص أن تكون في منتصف الإطار",
+    "goodLocation": "اختر مكاناً بإضاءة جيدة وخلفية واضحة"
   },
   "camera": {
     "takePhoto": "التقط صورة",
     "useThisPhoto": "استخدم هذه الصورة",
     "retake": "إعادة التقاط",
-    "chooseBest": "اختر أفضل صورة لك:"
+    "chooseBest": "اختر أفضل صورة لك:",
+    "switchCamera": "تبديل الكاميرا",
+    "stopCamera": "إيقاف الكاميرا"
+  },
+  "styles": {
+    "title": "اختر أسلوبك",
+    "subtitle": "حدد الأساليب التي تريد رؤيتها",
+    "continue": "متابعة",
+    "helper": "اختر أسلوباً واحداً على الأقل للمتابعة",
+    "casual": "كاجوال",
+    "formal": "رسمي",
+    "sportswear": "رياضي",
+    "traditional": "تراثي",
+    "casualDesc": "ملابس يومية مريحة",
+    "formalDesc": "ملابس مهنية ورسمية",
+    "sportswearDesc": "ملابس نشطة ورياضية",
+    "traditionalDesc": "أزياء ثقافية وتراثية"
   },
   "outfitGeneration": {
     "title": "جاري إنشاء إطلالتك المثالية",
@@ -110,12 +131,13 @@
     "confidenceMessage": "مظهرك يعكس القوة، لكن جمالك الحقيقي ينبع من الداخل. استمر في التألق!",
     "downloadStarted": "بدأ التحميل",
     "downloadDescription": "جاري حفظ إطلالتك الشخصية على جهازك.",
-    "addedToFavorites": "أضيف للمفضلة",
-    "removedFromFavorites": "أزيل من المفضلة",
+    "addedToFavorites": "أُضيف للمفضلة",
+    "removedFromFavorites": "أُزيل من المفضلة",
     "outfitSaved": "حُفظت الإطلالة في مفضلاتك",
     "outfitRemoved": "أُزيلت الإطلالة من مفضلاتك",
     "thanksForFeedback": "شكراً لتقييمك!",
-    "improveFuture": "هذا يساعدنا في تحسين التوصيات المستقبلية."
+    "improveFuture": "هذا يساعدنا في تحسين التوصيات المستقبلية.",
+    "inspirationalMessage": "جميلٌ هو المظهر حين يعكس قوتك، لكن الأجمل أنك قوي من الداخل. استمر في التألق، فأنت تستحق الأفضل دوماً."
   },
   "community": {
     "title": "مركز المجتمع",
@@ -177,7 +199,23 @@
     "aiPoweredDescription": "شخصي لك",
     "privacyPriority": "خصوصيتك أولويتنا",
     "privacyNotice": "الصور تُعالج محلياً ومؤقتاً. لا تُحفظ أو تُشارك أبداً.",
-    "inspirationalQuote": "الجمال يبدأ اللحظة التي تقرر فيها أن تكون نفسك."
+    "inspirationalQuote": "الجمال يبدأ اللحظة التي تقرر فيها أن تكون نفسك.",
+    "dataProtection": "حماية البيانات",
+    "temporaryProcessing": "معالجة مؤقتة فقط",
+    "noStorage": "لا يتم تخزين الصور",
+    "autoDelete": "حذف تلقائي بعد المعالجة"
+  },
+  "accessibility": {
+    "settings": "إعدادات إمكانية الوصول",
+    "fontSize": "حجم الخط",
+    "contrast": "التباين",
+    "animations": "الحركات",
+    "screenReader": "قارئ الشاشة",
+    "keyboardNavigation": "التنقل بلوحة المفاتيح",
+    "highContrast": "تباين عالي",
+    "reduceMotion": "تقليل الحركة",
+    "largeText": "نص كبير",
+    "focusIndicators": "مؤشرات التركيز"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -194,6 +232,17 @@
     "language": "اللغة",
     "english": "English",
     "arabic": "العربية",
-    "of": "من"
+    "of": "من",
+    "select": "اختر",
+    "upload": "رفع",
+    "download": "تحميل",
+    "share": "مشاركة",
+    "retry": "إعادة المحاولة",
+    "confirm": "تأكيد",
+    "welcome": "مرحباً",
+    "ready": "مستعد؟",
+    "getStarted": "ابدأ",
+    "finish": "إنهاء",
+    "restart": "إعادة البدء"
   }
 }
