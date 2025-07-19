@@ -2,15 +2,12 @@
 
 ## Project info
 
-**URL**: https://My New look.dev/projects/137043d2-72e2-45d6-b267-b7b2d632f20c
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
 **Use My New look**
-
-Simply visit the [My New look Project](https://My New look.dev/projects/137043d2-72e2-45d6-b267-b7b2d632f20c) and start prompting.
 
 Changes made via My New look will be committed automatically to this repo.
 
@@ -62,12 +59,7 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [My New look](https://My New look.dev/projects/137043d2-72e2-45d6-b267-b7b2d632f20c) and click on Share -> Publish.
-
 ## Can I connect a custom domain to my My New look project?
 
 Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.My New look.dev/tips-tricks/custom-domain#step-by-step-guide)
